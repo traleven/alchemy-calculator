@@ -222,9 +222,9 @@ class ReactantsPanel extends StatelessWidget {
     return shelf.colors
         .map((color) => FilterChipWithTooltip(
               label: ColorBox(size: 15, color: color),
-              selected: shelf.reactantColorFilterIncludes(color),
-              onSelected: (active) => shelf.setReactantColorFilter(color, active),
-              tooltip: Shelf.getColorDescription(color)?.name ?? '',
+              selected: shelf.reactantColorFilterIncludes(color.color),
+              onSelected: (active) => shelf.setReactantColorFilter(color.color, active),
+              tooltip: color.name,
             ))
         .toList(growable: false);
   }

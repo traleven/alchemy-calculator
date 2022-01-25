@@ -1,3 +1,4 @@
+import 'package:alchemy_calculator/model/shelf.dart';
 import 'package:flutter/material.dart';
 
 class Reactant {
@@ -23,9 +24,11 @@ class Reactant {
     this.isSolid = true,
     required this.circle,
     required this.group,
-    this.pater = "",
-    this.mater = "",
+    this.groupId = '',
+    this.pater = '',
+    this.mater = '',
     this.color,
+    this.colorDescription,
     this.quality,
     this.stage = 0,
     this.potion,
@@ -38,9 +41,11 @@ class Reactant {
         isSolid = true,
         circle = 7,
         group = '',
+        groupId = '',
         pater = '',
         mater = '',
         color = null,
+        colorDescription = null,
         quality = -1,
         stage = 0,
         potion = null;
@@ -51,9 +56,11 @@ class Reactant {
   final bool isSolid;
   final int circle;
   final String group;
+  final String groupId;
   final String pater;
   final String mater;
   final Color? color;
+  final ColorDescription? colorDescription;
   final int? quality;
   final int stage;
 
@@ -68,9 +75,7 @@ class Reactant {
   String get displayName => stage != 0
       ? 'Unstable something'
       : potion == null
-          ? name.isNotEmpty
-              ? name
-              : nomen
+          ? (groupId.isNotEmpty ? '$groupId ' : '') + (name.isNotEmpty ? name : nomen)
           : '${potion!.displaySolidState} (Эффект: ${potion!.regnum.regnumSymbol}; База: $nomen)';
 
   String get displaySolidState => isSolid.solidState();
@@ -87,16 +92,26 @@ class Reactant {
     return Color(int.parse(string.substring(1), radix: 16) + 0xFF000000);
   }
 
-  Reactant withValues({int? stage, bool? solid, String? regnum, Potion? potion, bool? elixir}) => Reactant(
+  Reactant withValues(
+          {int? stage,
+          bool? solid,
+          String? regnum,
+          Potion? potion,
+          bool? elixir,
+          String? groupId,
+          ColorDescription? colorDescription}) =>
+      Reactant(
         regnum: regnum ?? this.regnum,
         nomen: nomen,
         name: name,
         isSolid: solid ?? isSolid,
         circle: circle,
         group: group,
+        groupId: groupId ?? this.groupId,
         pater: pater,
         mater: mater,
         color: color,
+        colorDescription: colorDescription ?? this.colorDescription,
         quality: quality,
         stage: stage ?? this.stage,
         potion: (potion ?? this.potion)?.brewed(asElixir: elixir),

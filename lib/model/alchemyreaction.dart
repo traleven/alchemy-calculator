@@ -63,11 +63,15 @@ class AlchemyReaction extends ChangeNotifier {
             chain = _progress(workbench, i + 1, const Reactant.shit());
             log += '${const Reactant.shit().displayName}\n';
           } else {
-            final result = _transmute(
-              substance: _reverseReaction(substance: substance, catalyst: catalyst, operation: operation),
-              toPater: reactionPath.first.direction == 'pater',
-            );
-            log += '${result.displayName}\n';
+            var result = _reverseReaction(substance: substance, catalyst: catalyst, operation: operation);
+            bool toPater = reactionPath.first.direction == 'pater';
+            reactionPath = _resetPath(path: reactionPath, substance: result);
+            result = _transmute(substance: result, toPater: toPater);
+            log += result.displayName;
+            if (result.isPotion) {
+              log += ' ${Shelf.buildPotionEffect(result)}';
+            }
+            log += '\n';
             chain = _progress(workbench, i + 1, result);
           }
         } else {
@@ -134,6 +138,10 @@ class AlchemyReaction extends ChangeNotifier {
       if (Shelf.sameRegnum([substance.regnum, catalyst.regnum])) return const Reactant.shit();
       return substance.withValues(stage: substance.stage + 1, regnum: catalyst.regnum, solid: operation.resultState);
     }
+  }
+
+  Iterable<CatalystChain>? _resetPath({required Iterable<CatalystChain>? path, required Reactant substance}) {
+    return substance.stage < 3 ? path : null;
   }
 
   Reactant _transmute({required Reactant substance, required bool toPater}) {

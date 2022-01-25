@@ -9,8 +9,6 @@ import 'reactant.dart';
 class Shelf extends ChangeNotifier {
   Shelf(this.title) : super();
   final Map<String, Reactant> _data = {};
-  final Set<String> _groups = {};
-  final Set<String> _groupIds = {};
   final Set<Color> _colors = {Colors.transparent};
   final Set<AlchemyOperation> _operations = {};
   final Set<CatalystChain> _catalysts = {};
@@ -93,12 +91,14 @@ class Shelf extends ChangeNotifier {
     Map<String, dynamic> data = jsonDecode(json);
     data["reactants"].forEach((value) {
       final reactant = Reactant.fromJson(fileName, value);
-      _data[reactant.nomen] = reactant;
+      _data[reactant.nomen] = reactant.withValues(
+        groupId: groupIds.firstWhereOrNull((id) => reactant.group.contains(id)),
+        colorDescription: _colorSymbols[reactant.color],
+      );
       if (reactant.color != null) {
         _colors.add(reactant.color!);
       }
     });
-    _groups.addAll(_data.values.map((e) => e.group));
 
     if (operations.isEmpty) {
       final operationsJson = await bundle.loadString('recipies/operations.json');
@@ -110,16 +110,14 @@ class Shelf extends ChangeNotifier {
       data["catalysts"].forEach((value) {
         final chain = CatalystChain.fromJson(value);
         _catalysts.add(chain);
-        _groupIds.add(chain.initial.groupId);
       });
     }
 
     notifyListeners();
   }
 
-  List<String> get groups => _groups.toList(growable: false);
   List<String> get groupIds {
-    var result = _groupIds.toList(growable: false);
+    var result = _signSymbols.keys.toList(growable: false);
     result.sort();
     return result;
   }
@@ -131,8 +129,7 @@ class Shelf extends ChangeNotifier {
   List<Reactant> get reactants => _data.values.toList(growable: false);
   List<Reactant> get filteredReactants => _filteredReactants.toList(growable: false);
 
-  List<Color> get colors => _colors.toList(growable: false);
-  static ColorDescription? getColorDescription(Color? color) => _colorSymbols[color];
+  List<ColorDescription> get colors => _colorSymbols.values.toList(growable: false);
 
   List<AlchemyOperation> get operations => _operations.toList(growable: false);
   List<AlchemyOperation> get filteredOperations {

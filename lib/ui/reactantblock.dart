@@ -127,12 +127,12 @@ class ReactantItem extends StatelessWidget {
   ReactantItem({Key? key, required Reactant reactant})
       : nomen = reactant.isPotion ? Shelf.buildPotionEffect(reactant) : reactant.displayNomen,
         name = reactant.displayName + (reactant.hasSolidState ? ' (${reactant.displaySolidState})' : ''),
-        color = reactant.stage == 0 ? reactant.color : null,
+        color = reactant.stage == 0 ? reactant.colorDescription : null,
         super(key: key);
 
   final String nomen;
   final String name;
-  final Color? color;
+  final ColorDescription? color;
 
   @override
   Widget build(BuildContext context) {
