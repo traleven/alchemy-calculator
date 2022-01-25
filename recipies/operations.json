@@ -1,0 +1,540 @@
+{
+    "operations": [
+        {
+            "regnum": "",
+            "name": "Нагревание",
+            "condition": "",
+            "stage": -1
+        },
+        {
+            "regnum": "mineral",
+            "name": "Растворение",
+            "condition": "с подогревом",
+            "stage": 0,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "mineral",
+            "name": "Дистилляция",
+            "condition": "с водным охлаждением",
+            "stage": 1,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "mineral",
+            "name": "Вываривание",
+            "condition": "на слабом огне",
+            "stage": 2,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false
+        },
+        {
+            "regnum": "mineral",
+            "name": "Кальцинация",
+            "condition": "на сильном огне",
+            "stage": 0,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "mineral",
+            "name": "Сублимация",
+            "condition": "с водным охлаждением",
+            "stage": 1,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "mineral",
+            "name": "Лигация",
+            "condition": "с доступом воздуха",
+            "stage": 2,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true
+        },
+        {
+            "regnum": "mineral",
+            "name": "Дилюция",
+            "condition": "с подогревом",
+            "stage": 0,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "mineral",
+            "name": "Отстаивание",
+            "condition": "в герметичной колбе",
+            "stage": 1,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "mineral",
+            "name": "Свадьба",
+            "condition": "без кипения",
+            "stage": 2,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false
+        },
+        {
+            "regnum": "mineral",
+            "name": "Разложение",
+            "condition": "на сильном огне",
+            "stage": 0,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "mineral",
+            "name": "Фильтрация",
+            "condition": "через сито",
+            "stage": 1,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "mineral",
+            "name": "Ферментация",
+            "condition": "с доступом воздуха",
+            "stage": 2,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true
+        },
+        {
+            "regnum": "animal",
+            "name": "Растворение",
+            "condition": "с перемешиванием",
+            "stage": 0,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "animal",
+            "name": "Дистилляция",
+            "condition": "с бурным кипением",
+            "stage": 1,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "animal",
+            "name": "Вываривание",
+            "condition": "с перемешиванием",
+            "stage": 2,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false
+        },
+        {
+            "regnum": "animal",
+            "name": "Кальцинация",
+            "condition": "на слабом огне",
+            "stage": 0,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "animal",
+            "name": "Сублимация",
+            "condition": "на сильном огне",
+            "stage": 1,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "animal",
+            "name": "Лигация",
+            "condition": "в печи",
+            "stage": 2,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true
+        },
+        {
+            "regnum": "animal",
+            "name": "Дилюция",
+            "condition": "с перемешиванием",
+            "stage": 0,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "animal",
+            "name": "Отстаивание",
+            "condition": "на водяной бане",
+            "stage": 1,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "animal",
+            "name": "Свадьба",
+            "condition": "с бурным кипением",
+            "stage": 2,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false
+        },
+        {
+            "regnum": "animal",
+            "name": "Разложение",
+            "condition": "на слабом огне",
+            "stage": 0,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "animal",
+            "name": "Фильтрация",
+            "condition": "через бумагу",
+            "stage": 1,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "animal",
+            "name": "Ферментация",
+            "condition": "без доступа света",
+            "stage": 2,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true
+        },
+        {
+            "regnum": "herbal",
+            "name": "Растворение",
+            "condition": "с взбалтыванием",
+            "stage": 0,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "herbal",
+            "name": "Дистилляция",
+            "condition": "без кипения",
+            "stage": 1,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "herbal",
+            "name": "Вываривание",
+            "condition": "на сильном огне",
+            "stage": 2,
+            "substanceIsSolid": true,
+            "catalystIsSolid": false
+        },
+        {
+            "regnum": "herbal",
+            "name": "Кальцинация",
+            "condition": "в герметичной колбе",
+            "stage": 0,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "herbal",
+            "name": "Сублимация",
+            "condition": "на слабом огне",
+            "stage": 1,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "herbal",
+            "name": "Лигация",
+            "condition": "в герметичной колбе",
+            "stage": 2,
+            "substanceIsSolid": true,
+            "catalystIsSolid": true
+        },
+        {
+            "regnum": "herbal",
+            "name": "Дилюция",
+            "condition": "с взбалтыванием",
+            "stage": 0,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "herbal",
+            "name": "Отстаивание",
+            "condition": "без доступа света",
+            "stage": 1,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false,
+            "resultIsSolid": false
+        },
+        {
+            "regnum": "herbal",
+            "name": "Свадьба",
+            "condition": "с водным охлаждением",
+            "stage": 2,
+            "substanceIsSolid": false,
+            "catalystIsSolid": false
+        },
+        {
+            "regnum": "herbal",
+            "name": "Разложение",
+            "condition": "в герметичной колбе",
+            "stage": 0,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "herbal",
+            "name": "Фильтрация",
+            "condition": "через ткань",
+            "stage": 1,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true,
+            "resultIsSolid": true
+        },
+        {
+            "regnum": "herbal",
+            "name": "Ферментация",
+            "condition": "в герметичной колбе",
+            "stage": 2,
+            "substanceIsSolid": false,
+            "catalystIsSolid": true
+        }
+    ],
+    "catalysts": [
+        {
+            "initial": "♈ Car Apr Горючие",
+            "direction": "pater",
+            "stages": [
+                "♎ Car Oct Амальгамы",
+                "♋ Car Jul Спирты",
+                "♊ Mut Jun Колчеданы"
+            ]
+        },
+        {
+            "initial": "♈ Car Apr Горючие",
+            "direction": "mater",
+            "stages": [
+                "♎ Car Oct Амальгамы",
+                "♑ Car Jan Кристаллы",
+                "♒ Fix Feb Металлы"
+            ]
+        },
+        {
+            "initial": "♉ Fix May Камни",
+            "direction": "pater",
+            "stages": [
+                "♏ Fix Nov Щелочи",
+                "♌ Fix Aug Кислоты",
+                "♋ Car Jul Спирты"
+            ]
+        },
+        {
+            "initial": "♉ Fix May Камни",
+            "direction": "mater",
+            "stages": [
+                "♏ Fix Nov Щелочи",
+                "♒ Fix Feb Металлы",
+                "♓ Mut Mar Полуметаллы"
+            ]
+        },
+        {
+            "initial": "♊ Mut Jun Колчеданы",
+            "direction": "pater",
+            "stages": [
+                "♐ Mut Dec Самоцветы",
+                "♍ Mut Spt Купоросы",
+                "♌ Fix Aug Кислоты"
+            ]
+        },
+        {
+            "initial": "♊ Mut Jun Колчеданы",
+            "direction": "mater",
+            "stages": [
+                "♐ Mut Dec Самоцветы",
+                "♓ Mut Mar Полуметаллы",
+                "♈ Car Apr Горючие"
+            ]
+        },
+        {
+            "initial": "♋ Car Jul Спирты",
+            "direction": "pater",
+            "stages": [
+                "♑ Car Jan Кристаллы",
+                "♎ Car Oct Амальгамы",
+                "♍ Mut Spt Купоросы"
+            ]
+        },
+        {
+            "initial": "♋ Car Jul Спирты",
+            "direction": "mater",
+            "stages": [
+                "♑ Car Jan Кристаллы",
+                "♈ Car Apr Горючие",
+                "♉ Fix May Камни"
+            ]
+        },
+        {
+            "initial": "♌ Fix Aug Кислоты",
+            "direction": "pater",
+            "stages": [
+                "♒ Fix Feb Металлы",
+                "♏ Fix Nov Щелочи",
+                "♎ Car Oct Амальгамы"
+            ]
+        },
+        {
+            "initial": "♌ Fix Aug Кислоты",
+            "direction": "mater",
+            "stages": [
+                "♒ Fix Feb Металлы",
+                "♉ Fix May Камни",
+                "♊ Mut Jun Колчеданы"
+            ]
+        },
+        {
+            "initial": "♍ Mut Spt Купоросы",
+            "direction": "pater",
+            "stages": [
+                "♓ Mut Mar Полуметаллы",
+                "♐ Mut Dec Самоцветы",
+                "♏ Fix Nov Щелочи"
+            ]
+        },
+        {
+            "initial": "♍ Mut Spt Купоросы",
+            "direction": "mater",
+            "stages": [
+                "♓ Mut Mar Полуметаллы",
+                "♊ Mut Jun Колчеданы",
+                "♋ Car Jul Спирты"
+            ]
+        },
+        {
+            "initial": "♎ Car Oct Амальгамы",
+            "direction": "pater",
+            "stages": [
+                "♈ Car Apr Горючие",
+                "♑ Car Jan Кристаллы",
+                "♐ Mut Dec Самоцветы"
+            ]
+        },
+        {
+            "initial": "♎ Car Oct Амальгамы",
+            "direction": "mater",
+            "stages": [
+                "♈ Car Apr Горючие",
+                "♋ Car Jul Спирты",
+                "♌ Fix Aug Кислоты"
+            ]
+        },
+        {
+            "initial": "♏ Fix Nov Щелочи",
+            "direction": "pater",
+            "stages": [
+                "♉ Fix May Камни",
+                "♒ Fix Feb Металлы",
+                "♑ Car Jan Кристаллы"
+            ]
+        },
+        {
+            "initial": "♏ Fix Nov Щелочи",
+            "direction": "mater",
+            "stages": [
+                "♉ Fix May Камни",
+                "♌ Fix Aug Кислоты",
+                "♍ Mut Spt Купоросы"
+            ]
+        },
+        {
+            "initial": "♐ Mut Dec Самоцветы",
+            "direction": "pater",
+            "stages": [
+                "♊ Mut Jun Колчеданы",
+                "♓ Mut Mar Полуметаллы",
+                "♒ Fix Feb Металлы"
+            ]
+        },
+        {
+            "initial": "♐ Mut Dec Самоцветы",
+            "direction": "mater",
+            "stages": [
+                "♊ Mut Jun Колчеданы",
+                "♍ Mut Spt Купоросы",
+                "♎ Car Oct Амальгамы"
+            ]
+        },
+        {
+            "initial": "♑ Car Jan Кристаллы",
+            "direction": "pater",
+            "stages": [
+                "♋ Car Jul Спирты",
+                "♈ Car Apr Горючие",
+                "♓ Mut Mar Полуметаллы"
+            ]
+        },
+        {
+            "initial": "♑ Car Jan Кристаллы",
+            "direction": "mater",
+            "stages": [
+                "♋ Car Jul Спирты",
+                "♎ Car Oct Амальгамы",
+                "♏ Fix Nov Щелочи"
+            ]
+        },
+        {
+            "initial": "♒ Fix Feb Металлы",
+            "direction": "pater",
+            "stages": [
+                "♌ Fix Aug Кислоты",
+                "♉ Fix May Камни",
+                "♈ Car Apr Горючие"
+            ]
+        },
+        {
+            "initial": "♒ Fix Feb Металлы",
+            "direction": "mater",
+            "stages": [
+                "♌ Fix Aug Кислоты",
+                "♏ Fix Nov Щелочи",
+                "♐ Mut Dec Самоцветы"
+            ]
+        },
+        {
+            "initial": "♓ Mut Mar Полуметаллы",
+            "direction": "pater",
+            "stages": [
+                "♍ Mut Spt Купоросы",
+                "♊ Mut Jun Колчеданы",
+                "♉ Fix May Камни"
+            ]
+        },
+        {
+            "initial": "♓ Mut Mar Полуметаллы",
+            "direction": "mater",
+            "stages": [
+                "♍ Mut Spt Купоросы",
+                "♐ Mut Dec Самоцветы",
+                "♑ Car Jan Кристаллы"
+            ]
+        }
+    ]
+}
