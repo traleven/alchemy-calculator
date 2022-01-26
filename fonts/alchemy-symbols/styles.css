@@ -1,0 +1,433 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "alchemy-symbols";
+  src:url("fonts/alchemy-symbols.eot");
+  src:url("fonts/alchemy-symbols.eot?#iefix") format("embedded-opentype"),
+    url("fonts/alchemy-symbols.woff") format("woff"),
+    url("fonts/alchemy-symbols.ttf") format("truetype"),
+    url("fonts/alchemy-symbols.svg#alchemy-symbols") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "alchemy-symbols" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "alchemy-symbols" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-icon-air:before {
+  content: "a";
+}
+.icon-icon-alembic:before {
+  content: "b";
+}
+.icon-icon-alkali:before {
+  content: "c";
+}
+.icon-icon-alkali-2:before {
+  content: "d";
+}
+.icon-icon-alum:before {
+  content: "e";
+}
+.icon-icon-amalgam:before {
+  content: "f";
+}
+.icon-icon-antimony-ore:before {
+  content: "g";
+}
+.icon-icon-antinomy:before {
+  content: "h";
+}
+.icon-icon-aqua-regia:before {
+  content: "i";
+}
+.icon-icon-aqua-vitae:before {
+  content: "j";
+}
+.icon-icon-aqua-vitae-2:before {
+  content: "k";
+}
+.icon-icon-aquafortis:before {
+  content: "l";
+}
+.icon-icon-aquarius-multiplication:before {
+  content: "m";
+}
+.icon-icon-arsenic:before {
+  content: "n";
+}
+.icon-icon-auripigment:before {
+  content: "o";
+}
+.icon-icon-balneum-mariae:before {
+  content: "p";
+}
+.icon-icon-balneum-vaporis:before {
+  content: "q";
+}
+.icon-icon-bismuth-ore:before {
+  content: "r";
+}
+.icon-icon-black-sulfur:before {
+  content: "s";
+}
+.icon-icon-borax:before {
+  content: "t";
+}
+.icon-icon-borax2:before {
+  content: "u";
+}
+.icon-icon-brick:before {
+  content: "v";
+}
+.icon-icon-cadmia:before {
+  content: "w";
+}
+.icon-icon-caduceus:before {
+  content: "x";
+}
+.icon-icon-calcination-aries:before {
+  content: "y";
+}
+.icon-icon-calx:before {
+  content: "z";
+}
+.icon-icon-capricorn-fermentation:before {
+  content: "A";
+}
+.icon-icon-caput-mortuum:before {
+  content: "B";
+}
+.icon-icon-cinnabar:before {
+  content: "C";
+}
+.icon-icon-copper-antimoniate:before {
+  content: "D";
+}
+.icon-icon-copper-ore:before {
+  content: "E";
+}
+.icon-icon-copper-venus:before {
+  content: "F";
+}
+.icon-icon-copper-venus-2:before {
+  content: "G";
+}
+.icon-icon-crocus-of-copper:before {
+  content: "H";
+}
+.icon-icon-crocus-of-copper-2:before {
+  content: "I";
+}
+.icon-icon-crocus-of-iron:before {
+  content: "J";
+}
+.icon-icon-crucible:before {
+  content: "K";
+}
+.icon-icon-crucible-2:before {
+  content: "L";
+}
+.icon-icon-crucible-3:before {
+  content: "M";
+}
+.icon-icon-crucible-4:before {
+  content: "N";
+}
+.icon-icon-crucible-5:before {
+  content: "O";
+}
+.icon-icon-day-night:before {
+  content: "P";
+}
+.icon-icon-dissolution-cancer:before {
+  content: "Q";
+}
+.icon-icon-dissolve:before {
+  content: "R";
+}
+.icon-icon-dissolve-2:before {
+  content: "S";
+}
+.icon-icon-earth:before {
+  content: "T";
+}
+.icon-icon-fire:before {
+  content: "U";
+}
+.icon-icon-fixation-gemini:before {
+  content: "V";
+}
+.icon-icon-gold:before {
+  content: "W";
+}
+.icon-icon-gold-sun:before {
+  content: "X";
+}
+.icon-icon-gum:before {
+  content: "Y";
+}
+.icon-icon-half-dram:before {
+  content: "Z";
+}
+.icon-icon-half-ounce:before {
+  content: "0";
+}
+.icon-icon-hour:before {
+  content: "1";
+}
+.icon-icon-iron-copper-ore:before {
+  content: "2";
+}
+.icon-icon-iron-mars:before {
+  content: "3";
+}
+.icon-icon-iron-ore:before {
+  content: "4";
+}
+.icon-icon-iron-ore-2:before {
+  content: "5";
+}
+.icon-icon-lead-ore:before {
+  content: "6";
+}
+.icon-icon-lead-saturn:before {
+  content: "7";
+}
+.icon-icon-leo-digestion:before {
+  content: "8";
+}
+.icon-icon-lodestone:before {
+  content: "9";
+}
+.icon-icon-magnesium:before {
+  content: "!";
+}
+.icon-icon-marcasite:before {
+  content: "\"";
+}
+.icon-icon-mercury-sublimate:before {
+  content: "#";
+}
+.icon-icon-mercury-sublimate-2:before {
+  content: "$";
+}
+.icon-icon-mercury-sublimate-3:before {
+  content: "%";
+}
+.icon-icon-month:before {
+  content: "&";
+}
+.icon-icon-night:before {
+  content: "'";
+}
+.icon-icon-nitre:before {
+  content: "(";
+}
+.icon-icon-oil:before {
+  content: ")";
+}
+.icon-icon-philosophers-sulfur:before {
+  content: "*";
+}
+.icon-icon-pisces-projection:before {
+  content: "+";
+}
+.icon-icon-potash:before {
+  content: ",";
+}
+.icon-icon-powder:before {
+  content: "-";
+}
+.icon-icon-powdered-brick:before {
+  content: ".";
+}
+.icon-icon-precipitate:before {
+  content: "/";
+}
+.icon-icon-purify:before {
+  content: ":";
+}
+.icon-icon-putrefaction:before {
+  content: ";";
+}
+.icon-icon-quick-lime:before {
+  content: "<";
+}
+.icon-icon-quicksilver-mercury:before {
+  content: "=";
+}
+.icon-icon-quintessence:before {
+  content: ">";
+}
+.icon-icon-realgar:before {
+  content: "?";
+}
+.icon-icon-realgar-2:before {
+  content: "@";
+}
+.icon-icon-regulus:before {
+  content: "[";
+}
+.icon-icon-regulus-2:before {
+  content: "]";
+}
+.icon-icon-regulus-3:before {
+  content: "^";
+}
+.icon-icon-regulus-4:before {
+  content: "_";
+}
+.icon-icon-regulus-of-antimony:before {
+  content: "`";
+}
+.icon-icon-regulus-of-antimony-2:before {
+  content: "{";
+}
+.icon-icon-regulus-of-iron:before {
+  content: "|";
+}
+.icon-icon-retort:before {
+  content: "}";
+}
+.icon-icon-rock-salt:before {
+  content: "~";
+}
+.icon-icon-rock-salt-2:before {
+  content: "\\";
+}
+.icon-icon-sagittarias-incineration:before {
+  content: "\e000";
+}
+.icon-icon-sal-ammoniac:before {
+  content: "\e001";
+}
+.icon-icon-salt:before {
+  content: "\e002";
+}
+.icon-icon-salt-of-antimony:before {
+  content: "\e003";
+}
+.icon-icon-salt-of-copper-antimoniate:before {
+  content: "\e004";
+}
+.icon-icon-scepter-of-jove:before {
+  content: "\e005";
+}
+.icon-icon-scorpio-separation:before {
+  content: "\e006";
+}
+.icon-icon-silver:before {
+  content: "\e007";
+}
+.icon-icon-silver-moon:before {
+  content: "\e008";
+}
+.icon-icon-soap:before {
+  content: "\e009";
+}
+.icon-icon-spirit:before {
+  content: "\e00a";
+}
+.icon-icon-starred-trident:before {
+  content: "\e00b";
+}
+.icon-icon-stratum-super-stratum:before {
+  content: "\e00c";
+}
+.icon-icon-stratum-super-stratum2:before {
+  content: "\e00d";
+}
+.icon-icon-sublimate:before {
+  content: "\e00e";
+}
+.icon-icon-sublimate-of-copper:before {
+  content: "\e00f";
+}
+.icon-icon-sublimate-of-salt-of-antimony:before {
+  content: "\e010";
+}
+.icon-icon-sublimate-of-salt-of-copper:before {
+  content: "\e011";
+}
+.icon-icon-sublimation:before {
+  content: "\e012";
+}
+.icon-icon-sulfur-brimstone:before {
+  content: "\e013";
+}
+.icon-icon-tartar:before {
+  content: "\e014";
+}
+.icon-icon-tartar-2:before {
+  content: "\e015";
+}
+.icon-icon-tin-jupiter:before {
+  content: "\e016";
+}
+.icon-icon-tin-ore:before {
+  content: "\e017";
+}
+.icon-icon-tincture:before {
+  content: "\e018";
+}
+.icon-icon-trident:before {
+  content: "\e019";
+}
+.icon-icon-urine:before {
+  content: "\e01a";
+}
+.icon-icon-verdigris:before {
+  content: "\e01b";
+}
+.icon-icon-vinegar:before {
+  content: "\e01c";
+}
+.icon-icon-vinegar2:before {
+  content: "\e01d";
+}
+.icon-icon-vinegar3:before {
+  content: "\e01e";
+}
+.icon-icon-vinegar-of-antimony:before {
+  content: "\e01f";
+}
+.icon-icon-virgo-distillation:before {
+  content: "\e020";
+}
+.icon-icon-vitriol:before {
+  content: "\e021";
+}
+.icon-icon-vitriol-2:before {
+  content: "\e022";
+}
+.icon-icon-water:before {
+  content: "\e023";
+}
+.icon-icon-wax:before {
+  content: "\e024";
+}

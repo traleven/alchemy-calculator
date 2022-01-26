@@ -5,11 +5,11 @@ import 'dart:convert';
 
 import 'alchemyoperations.dart';
 import 'reactant.dart';
+import 'icons.dart';
 
 class Shelf extends ChangeNotifier {
   Shelf(this.title) : super();
   final Map<String, Reactant> _data = {};
-  final Set<Color> _colors = {Colors.transparent};
   final Set<AlchemyOperation> _operations = {};
   final Set<CatalystChain> _catalysts = {};
   final String title;
@@ -48,7 +48,15 @@ class Shelf extends ChangeNotifier {
     }
   };
 
-  static final Map<Color, ColorDescription> _colorSymbols = {};
+  static final Map<Color, ColorDescription> _colorSymbols = {
+    Colors.transparent: const ColorDescription(
+      color: Colors.transparent,
+      symbol: '',
+      icon: null,
+      name: '',
+      description: [],
+    )
+  };
   static final Map<String, List<String>> _signSymbols = {};
   static final Map<String, Shelf> _cache = {};
 
@@ -73,7 +81,8 @@ class Shelf extends ChangeNotifier {
   }
 
   Future<void> asyncInit(AssetBundle bundle, String fileName) async {
-    if (_colorSymbols.isEmpty) {
+    await AlchemyIcons.loadAsync(bundle);
+    if (_colorSymbols.length == 1) {
       final nomenclatureJson = await bundle.loadString('recipies/nomenclature.json');
       Map<String, dynamic> data = jsonDecode(nomenclatureJson);
       data['colors'].forEach((value) {
@@ -95,9 +104,6 @@ class Shelf extends ChangeNotifier {
         groupId: groupIds.firstWhereOrNull((id) => reactant.group.contains(id)),
         colorDescription: _colorSymbols[reactant.color],
       );
-      if (reactant.color != null) {
-        _colors.add(reactant.color!);
-      }
     });
 
     if (operations.isEmpty) {
@@ -217,7 +223,8 @@ class Shelf extends ChangeNotifier {
 }
 
 class ColorDescription {
-  const ColorDescription({required this.color, required this.symbol, required this.name, required this.description});
+  const ColorDescription(
+      {required this.color, required this.symbol, required this.icon, required this.name, required this.description});
 
   ColorDescription.fromJson(Color color, dynamic map) : this.fromMap(color, map);
 
@@ -225,12 +232,14 @@ class ColorDescription {
       : this(
           color: color,
           symbol: map["symbol"],
+          icon: AlchemyIcons.named(map["icon"]),
           name: map["name"],
           description: map["description"].cast<String>().toList(growable: false),
         );
 
   final Color color;
   final String symbol;
+  final AssetImage? icon;
   final String name;
   final List<String> description;
 }
@@ -238,5 +247,9 @@ class ColorDescription {
 extension StringConversions on String {
   String get regnumName {
     return Shelf._regnumNames[this] ?? this;
+  }
+
+  AssetImage? get regnumIcon {
+    return AlchemyIcons.named(this == 'potion' ? 'icon_$this' : 'icon_realm_$this');
   }
 }

@@ -37,7 +37,7 @@ class Reactant {
   const Reactant.shit()
       : regnum = '',
         nomen = 'Мертвая Голова',
-        name = '🝎 🝎 🝎 Гажа 🝎 🝎 🝎',
+        name = '🝎 🝎 🝎 Гажа 🝎 🝎 \u{1f74e}',
         isSolid = true,
         circle = 7,
         group = '',
@@ -75,9 +75,12 @@ class Reactant {
   String get displayName => stage != 0
       ? 'Unstable something'
       : potion == null
-          ? (groupId.isNotEmpty ? '$groupId ' : '') + (name.isNotEmpty ? name : nomen)
+          ? (groupId.isNotEmpty ? '$groupId ' : '') +
+              (colorDescription != null ? '${colorDescription!.symbol} ' : '') +
+              (name.isNotEmpty ? name : nomen)
           : '${potion!.displaySolidState} (Эффект: ${potion!.regnum.regnumSymbol}; База: $nomen)';
 
+  int get fullStage => (stage ~/ 2) * 2;
   String get displaySolidState => isSolid.solidState();
   bool get hasSolidState => quality == null || quality! >= 0;
   bool get isPotion => stage == 0 && potion?.isElixir != null;
@@ -117,8 +120,6 @@ class Reactant {
         potion: (potion ?? this.potion)?.brewed(asElixir: elixir),
       );
 
-  Reactant incrementedStage(int increment) => withValues(stage: stage + increment);
-
   bool isChildOf(String one, String another) =>
       (pater == one && mater == another) || (mater == one && pater == another);
 }
@@ -146,20 +147,20 @@ extension BoolComparison on bool {
       : other
           ? 1
           : -1);
-  String solidState() => this ? '🧊' : '💧';
+  String solidState() => this ? ' 🝙 ' : '💧';
 }
 
 extension StringConversions on String {
   String get regnumSymbol {
     switch (this) {
       case 'mineral':
-        return '⛏️';
+        return '\u{1F728}';
       case 'animal':
-        return '🐾';
+        return '\u{1F721}';
       case 'herbal':
-        return '🌿';
+        return '\u{1F76E}';
       case 'potion':
-        return '⚗️';
+        return '\u{2697}';
     }
     return this;
   }

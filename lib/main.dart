@@ -13,25 +13,35 @@ void main() {
   runApp(const MyApp());
 }
 
+const TextStyle defaultTextStyle = TextStyle(
+  color: Colors.black,
+  fontFamily: 'NotoSansSymbols',
+  fontFamilyFallback: ['NotoSansSymbols-Black', 'NotoEmoji', 'NotoSans'],
+);
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Alchemy Calculator',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
-          ),
-          iconTheme: const IconThemeData(
-            color: Colors.black,
-            opacity: 1.0,
-          ),
+      title: 'Alchemy Calculator',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
         ),
-        home: const Material(child: PageComposition()));
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+          opacity: 1.0,
+        ),
+      ),
+      home: const Material(
+        textStyle: defaultTextStyle,
+        child: PageComposition(),
+      ),
+    );
   }
 }
 

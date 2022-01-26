@@ -1,3 +1,4 @@
+import 'package:alchemy_calculator/main.dart';
 import 'package:alchemy_calculator/model/reactant.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,23 +18,26 @@ class WorkbenchPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        restorationId: "workbench",
-        primary: false,
-        child: Consumer<Workbench>(
-          builder: (context, workbench, child) => Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              for (final block in workbench.blocks)
-                ChangeNotifierProvider.value(
-                  value: block,
-                  child: Consumer<AlchemyReaction>(
-                    builder: (context, reaction, child) => ReactantBlock(onCompound: () => reaction(workbench)),
+      body: DefaultTextStyle(
+        style: defaultTextStyle,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          restorationId: "workbench",
+          primary: false,
+          child: Consumer<Workbench>(
+            builder: (context, workbench, child) => Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (final block in workbench.blocks)
+                  ChangeNotifierProvider.value(
+                    value: block,
+                    child: Consumer<AlchemyReaction>(
+                      builder: (context, reaction, child) => ReactantBlock(onCompound: () => reaction(workbench)),
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -58,7 +62,7 @@ class LogPanel extends StatelessWidget {
         body: ListView(
           primary: false,
           children: [
-            for (final item in reaction.log) Row(children: [Text(item)])
+            for (final item in reaction.log) Row(children: [Text(item, style: defaultTextStyle)])
           ],
         ),
         floatingActionButton: IconButton(
@@ -109,7 +113,7 @@ class OperationsPanel extends StatelessWidget {
     return Shelf.regna
         .map<Widget>(
           (regnum) => FilterChipWithTooltip(
-            label: Text(regnum.regnumSymbol),
+            label: ImageIcon(regnum.regnumIcon),
             selected: shelf.operationsRegnumFilterIncludes(regnum),
             onSelected: (active) => shelf.setOperationsRegnumFilter(regnum, active),
             tooltip: regnum.regnumName,
@@ -188,7 +192,7 @@ class ReactantsPanel extends StatelessWidget {
     final result = Shelf.regna
         .map(
           (regnum) => FilterChipWithTooltip(
-            label: Text(regnum.regnumSymbol),
+            label: ImageIcon(regnum.regnumIcon),
             selected: shelf.reactantRegnumFilterIncludes(regnum),
             onSelected: (active) => shelf.setReactantRegnumFilter(regnum, active),
             tooltip: regnum.regnumName,
@@ -198,7 +202,7 @@ class ReactantsPanel extends StatelessWidget {
 
     result.add(
       FilterChipWithTooltip(
-        label: Text('potion'.regnumSymbol),
+        label: ImageIcon('potion'.regnumIcon),
         selected: shelf.reactantPotionFilterIncludes(),
         onSelected: (active) => shelf.setReactantPotionFilter(active),
         tooltip: 'potion'.regnumName,
@@ -210,7 +214,7 @@ class ReactantsPanel extends StatelessWidget {
   static List<Widget> _buildGroupFilterChips(Shelf shelf) {
     return shelf.groupIds
         .map((id) => FilterChipWithTooltip(
-              label: Text(id),
+              label: Text(id, style: const TextStyle(fontFamily: 'NotoSansSymbols')),
               selected: shelf.reactantGroupFilterIncludes(id),
               onSelected: (active) => shelf.setReactantGroupFilter(id, active),
               tooltip: Shelf.getNameForGroup(id) ?? '',
@@ -298,6 +302,7 @@ Widget _makeDraggable(BuildContext context, Widget item) {
   return Material(
     type: MaterialType.card,
     clipBehavior: Clip.hardEdge,
+    textStyle: defaultTextStyle,
     elevation: 8.0,
     borderRadius: const BorderRadius.all(Radius.circular(4)),
     child: Padding(padding: const EdgeInsets.all(4), child: item),

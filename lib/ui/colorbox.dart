@@ -12,10 +12,6 @@ class ColorBox extends Container {
             color: color?.color ?? Colors.transparent,
             border: Border.all(color: const Color(0xFF303030)),
           ),
-          child: Text(
-            color?.symbol ?? '',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: size / 2),
-          ),
+          child: Transform.scale(scale: 0.85, child: ImageIcon(color?.icon)),
         );
 }

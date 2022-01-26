@@ -41,7 +41,7 @@ class AlchemyReaction extends ChangeNotifier {
         log += '(${substance.displayName}) + (${catalyst.displayName}) =[${operation.displayName}]=> ';
 
         // Natural reaction
-        if (operation.stage == -1) {
+        if (operation.stage < 0) {
           final child = _directReaction(substance: substance, catalyst: catalyst, operation: operation);
           log += '${child.displayName}\n';
           chain = _progress(workbench, i + 1, child);
@@ -51,7 +51,7 @@ class AlchemyReaction extends ChangeNotifier {
           log += '${child.displayName}\n';
           chain = _progress(workbench, i + 1, child);
           // Reverse reaction
-        } else if (operation.stage == substance.stage) {
+        } else if (operation.stage == substance.fullStage) {
           reactionPath = _filterReactionPaths(
             reactionPath,
             substance: substance,
@@ -132,20 +132,20 @@ class AlchemyReaction extends ChangeNotifier {
     if (substance.potion == null) {
       // Not a potiohn
       if (!Shelf.sameRegnum([substance.regnum, catalyst.regnum, operation.regnum])) return const Reactant.shit();
-      return substance.withValues(stage: substance.stage + 1, solid: operation.resultState);
+      return substance.withValues(stage: substance.stage + 2, solid: operation.resultState);
     } else {
       // Potion
       if (Shelf.sameRegnum([substance.regnum, catalyst.regnum])) return const Reactant.shit();
-      return substance.withValues(stage: substance.stage + 1, regnum: catalyst.regnum, solid: operation.resultState);
+      return substance.withValues(stage: substance.stage + 2, regnum: catalyst.regnum, solid: operation.resultState);
     }
   }
 
   Iterable<CatalystChain>? _resetPath({required Iterable<CatalystChain>? path, required Reactant substance}) {
-    return substance.stage < 3 ? path : null;
+    return substance.stage < 6 ? path : null;
   }
 
   Reactant _transmute({required Reactant substance, required bool toPater}) {
-    return (substance.stage < 3
+    return (substance.stage < 6
             ? substance
             : substance.potion != null
                 ? substance.withValues(stage: 0, elixir: toPater)

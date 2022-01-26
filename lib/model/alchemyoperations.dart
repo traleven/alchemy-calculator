@@ -20,7 +20,7 @@ class AlchemyOperation implements Comparable {
           regnum: map["regnum"],
           name: map["name"],
           condition: map["condition"],
-          stage: map["stage"],
+          stage: map["stage"] * 2,
           substanceState: map["substanceIsSolid"],
           catalystState: map["catalystIsSolid"],
           resultState: map["resultIsSolid"],
@@ -41,7 +41,7 @@ class AlchemyOperation implements Comparable {
       '${substanceState?.solidState() ?? '_'}+${catalystState?.solidState() ?? '_'}=${resultState?.solidState() ?? '_'}';
   get requireSolidState => substanceState != null || catalystState != null || resultState != null;
 
-  get displayCondition => condition;
+  String? get displayCondition => condition;
 
   bool acceptSubstance(Reactant substance) => substanceState == null || substanceState == substance.isSolid;
   bool acceptCatalyst(Reactant catalyst) => catalystState == null || catalystState == catalyst.isSolid;

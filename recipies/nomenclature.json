@@ -3,6 +3,7 @@
         {
             "color": "#f4cccc",
             "symbol": "☉",
+            "icon": "icon_sun",
             "name": "Солнце",
             "description": [
                 "Красный",
@@ -13,6 +14,7 @@
         {
             "color": "#ffffff",
             "symbol": "☽",
+            "icon": "icon_moon",
             "name": "Луна",
             "description": [
                 "Белый",
@@ -23,6 +25,7 @@
         {
             "color": "#cfe2f3",
             "symbol": "♃",
+            "icon": "icon_jupiter",
             "name": "Юпитер",
             "description": [
                 "Синий",
@@ -33,6 +36,7 @@
         {
             "color": "#d9ead3",
             "symbol": "♀",
+            "icon": "icon_venus",
             "name": "Венера",
             "description": [
                 "Зеленый",
@@ -43,6 +47,7 @@
         {
             "color": "#e6b8af",
             "symbol": "♂",
+            "icon": "icon_mars",
             "name": "Марс",
             "description": [
                 "Багровый",
@@ -53,6 +58,7 @@
         {
             "color": "#fce5cd",
             "symbol": "⚷",
+            "icon": "icon_chiron",
             "name": "Хирон",
             "description": [
                 "Светлый",
@@ -63,6 +69,7 @@
         {
             "color": "#fff2cc",
             "symbol": "☄",
+            "icon": "icon_haermaion",
             "name": "Гермаон",
             "description": [
                 "Желтый",
@@ -73,6 +80,7 @@
         {
             "color": "#d9d2e9",
             "symbol": "⚸",
+            "icon": "icon_lilith",
             "name": "Лилит",
             "description": [
                 "Темный",
@@ -83,6 +91,7 @@
         {
             "color": "#b7b7b7",
             "symbol": "♄",
+            "icon": "icon_saturn",
             "name": "Сатурн",
             "description": [
                 "Черный",
