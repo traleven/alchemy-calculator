@@ -56,14 +56,14 @@ class AlchemyOperation implements Comparable {
       (substanceState == null || substanceState == substance.isSolid) &&
       (paterQuality == null ||
           paterQuality == substance.quality ||
-          paterQuality == shelf.findReactant(substance.pater)?.quality ||
-          paterQuality == shelf.findReactant(shelf.findReactant(substance.pater)?.pater)?.quality);
+          paterQuality == substance.getPater(shelf)?.quality ||
+          paterQuality == substance.getPater(shelf)?.getPater(shelf)?.quality);
   bool acceptCatalyst(Reactant catalyst, Shelf shelf) =>
       (catalystState == null || catalystState == catalyst.isSolid) &&
       (materQuality == null ||
           materQuality == catalyst.quality ||
-          materQuality == shelf.findReactant(catalyst.mater)?.quality ||
-          materQuality == shelf.findReactant(shelf.findReactant(catalyst.mater)?.mater)?.quality);
+          materQuality == catalyst.getMater(shelf)?.quality ||
+          materQuality == catalyst.getMater(shelf)?.getMater(shelf)?.quality);
 
   @override
   int compareTo(other) {
@@ -119,4 +119,14 @@ class CatalystChain {
   final Catalyst initial;
   final bool toPater;
   final UnmodifiableListView<Catalyst> stages;
+}
+
+extension ReactantExtensions on Reactant {
+  Reactant? getPater(Shelf shelf) {
+    return shelf.findReactant(pater);
+  }
+
+  Reactant? getMater(Shelf shelf) {
+    return shelf.findReactant(mater);
+  }
 }

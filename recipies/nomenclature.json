@@ -9,7 +9,9 @@
                 "Красный",
                 "Вечный",
                 "Золотой"
-            ]
+            ],
+            "paterQuality": 0,
+            "materQuality": 0
         },
         {
             "color": "#ffffff",
@@ -20,7 +22,9 @@
                 "Белый",
                 "Бледный",
                 "Серебряный"
-            ]
+            ],
+            "paterQuality": 1,
+            "materQuality": 0
         },
         {
             "color": "#cfe2f3",
@@ -31,7 +35,9 @@
                 "Синий",
                 "Благой",
                 "Оловянный"
-            ]
+            ],
+            "paterQuality": 2,
+            "materQuality": 0
         },
         {
             "color": "#d9ead3",
@@ -42,7 +48,9 @@
                 "Зеленый",
                 "Утренний",
                 "Медный"
-            ]
+            ],
+            "paterQuality": 0,
+            "materQuality": 1
         },
         {
             "color": "#e6b8af",
@@ -53,7 +61,9 @@
                 "Багровый",
                 "Кровавый",
                 "Железный"
-            ]
+            ],
+            "paterQuality": 1,
+            "materQuality": 1
         },
         {
             "color": "#fce5cd",
@@ -64,7 +74,9 @@
                 "Светлый",
                 "Надежный",
                 "Латунный"
-            ]
+            ],
+            "paterQuality": 2,
+            "materQuality": 1
         },
         {
             "color": "#fff2cc",
@@ -75,7 +87,9 @@
                 "Желтый",
                 "Вещий",
                 "Киноварный"
-            ]
+            ],
+            "paterQuality": 0,
+            "materQuality": 2
         },
         {
             "color": "#d9d2e9",
@@ -86,7 +100,9 @@
                 "Темный",
                 "Ночной",
                 "Висмутовый"
-            ]
+            ],
+            "paterQuality": 1,
+            "materQuality": 2
         },
         {
             "color": "#b7b7b7",
@@ -97,7 +113,9 @@
                 "Черный",
                 "Холодный",
                 "Свинцовый"
-            ]
+            ],
+            "paterQuality": 2,
+            "materQuality": 2
         }
     ],
     "signs": [

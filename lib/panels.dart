@@ -24,22 +24,19 @@ class WorkbenchPanel extends StatelessWidget {
           scrollDirection: Axis.vertical,
           restorationId: "workbench",
           primary: false,
-          child: Consumer<Shelf>(
-            builder: (context, shelf, child) => Consumer<Workbench>(
-              builder: (context, workbench, child) => Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (final block in workbench.blocks)
-                    ChangeNotifierProvider.value(
-                      value: block,
-                      child: Consumer<AlchemyReaction>(
-                        builder: (context, reaction, child) =>
-                            ReactantBlock(onCompound: () => reaction(workbench, shelf)),
-                      ),
+          child: Consumer<Workbench>(
+            builder: (context, workbench, child) => Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                for (final block in workbench.blocks)
+                  ChangeNotifierProvider.value(
+                    value: block,
+                    child: Consumer<AlchemyReaction>(
+                      builder: (context, reaction, child) => ReactantBlock(onCompound: () => reaction(workbench)),
                     ),
-                ],
-              ),
+                  ),
+              ],
             ),
           ),
         ),

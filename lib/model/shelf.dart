@@ -55,6 +55,8 @@ class Shelf extends ChangeNotifier {
       icon: null,
       name: '',
       description: [],
+      paterQuality: -1,
+      materQuality: -1,
     )
   };
   static final Map<String, List<String>> _signSymbols = {};
@@ -224,7 +226,13 @@ class Shelf extends ChangeNotifier {
 
 class ColorDescription {
   const ColorDescription(
-      {required this.color, required this.symbol, required this.icon, required this.name, required this.description});
+      {required this.color,
+      required this.symbol,
+      required this.icon,
+      required this.name,
+      required this.description,
+      required this.paterQuality,
+      required this.materQuality});
 
   ColorDescription.fromJson(Color color, dynamic map) : this.fromMap(color, map);
 
@@ -235,6 +243,8 @@ class ColorDescription {
           icon: AlchemyIcons.named(map["icon"]),
           name: map["name"],
           description: map["description"].cast<String>().toList(growable: false),
+          paterQuality: map["paterQuality"],
+          materQuality: map["materQuality"],
         );
 
   final Color color;
@@ -242,6 +252,8 @@ class ColorDescription {
   final AssetImage? icon;
   final String name;
   final List<String> description;
+  final int paterQuality;
+  final int materQuality;
 }
 
 extension StringConversions on String {
