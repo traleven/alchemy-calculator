@@ -75,12 +75,12 @@ class Reactant {
   String get displayName => stage != 0
       ? 'Unstable something'
       : potion == null
-          ? (groupId.isNotEmpty ? '$groupId ' : '') +
-              (colorDescription != null ? '${colorDescription!.symbol} ' : '') +
+          ? (colorDescription != null ? '${colorDescription!.symbol} ' : '') +
+              (groupId.isNotEmpty ? '$groupId ' : '') +
               (name.isNotEmpty ? name : nomen)
           : '${potion!.displaySolidState} (Эффект: ${potion!.regnum.regnumSymbol}; База: $nomen)';
 
-  int get fullStage => (stage ~/ 2) * 2;
+  int get fullStage => stage ~/ 2;
   String get displaySolidState => isSolid.solidState();
   bool get hasSolidState => quality == null || quality! >= 0;
   bool get isPotion => stage == 0 && potion?.isElixir != null;

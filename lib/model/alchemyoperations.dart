@@ -2,6 +2,8 @@ import 'package:alchemy_calculator/model/reactant.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+import 'shelf.dart';
+
 class AlchemyOperation implements Comparable {
   const AlchemyOperation({
     required this.regnum,
@@ -11,6 +13,8 @@ class AlchemyOperation implements Comparable {
     this.substanceState,
     this.catalystState,
     this.resultState,
+    this.paterQuality,
+    this.materQuality,
   });
 
   AlchemyOperation.fromJson(dynamic map) : this.fromMap(map);
@@ -24,6 +28,8 @@ class AlchemyOperation implements Comparable {
           substanceState: map["substanceIsSolid"],
           catalystState: map["catalystIsSolid"],
           resultState: map["resultIsSolid"],
+          paterQuality: map["paterQuality"],
+          materQuality: map["materQuality"],
         );
 
   final String regnum;
@@ -33,18 +39,31 @@ class AlchemyOperation implements Comparable {
   final bool? substanceState;
   final bool? catalystState;
   final bool? resultState;
+  final int? paterQuality;
+  final int? materQuality;
 
-  get id => '$regnum $name';
+  String get id => '$regnum $name';
+  int get fullStage => stage ~/ 2;
 
-  get displayName => name;
-  get displaySolidState =>
+  String get displayName => name;
+  String get displaySolidState =>
       '${substanceState?.solidState() ?? '_'}+${catalystState?.solidState() ?? '_'}=${resultState?.solidState() ?? '_'}';
-  get requireSolidState => substanceState != null || catalystState != null || resultState != null;
+  bool get requireSolidState => substanceState != null || catalystState != null || resultState != null;
 
   String? get displayCondition => condition;
 
-  bool acceptSubstance(Reactant substance) => substanceState == null || substanceState == substance.isSolid;
-  bool acceptCatalyst(Reactant catalyst) => catalystState == null || catalystState == catalyst.isSolid;
+  bool acceptSubstance(Reactant substance, Shelf shelf) =>
+      (substanceState == null || substanceState == substance.isSolid) &&
+      (paterQuality == null ||
+          paterQuality == substance.quality ||
+          paterQuality == shelf.findReactant(substance.pater)?.quality ||
+          paterQuality == shelf.findReactant(shelf.findReactant(substance.pater)?.pater)?.quality);
+  bool acceptCatalyst(Reactant catalyst, Shelf shelf) =>
+      (catalystState == null || catalystState == catalyst.isSolid) &&
+      (materQuality == null ||
+          materQuality == catalyst.quality ||
+          materQuality == shelf.findReactant(catalyst.mater)?.quality ||
+          materQuality == shelf.findReactant(shelf.findReactant(catalyst.mater)?.mater)?.quality);
 
   @override
   int compareTo(other) {
@@ -54,9 +73,18 @@ class AlchemyOperation implements Comparable {
             ? substanceState!.compareTo(other.substanceState)
             : catalystState != other.catalystState && catalystState != null
                 ? catalystState!.compareTo(other.catalystState)
-                : regnum != other.regnum
-                    ? regnum.compareTo(other.regnum)
-                    : name.compareTo(other.name);
+                : paterQuality != null && paterQuality != other.paterQuality
+                    ? paterQuality!.compareTo(other.paterQuality)
+                    : materQuality != null && materQuality != other.materQuality
+                        ? materQuality!.compareTo(other.materQuality)
+                        : regnum != other.regnum
+                            ? regnum.compareTo(other.regnum)
+                            : name.compareTo(other.name);
+  }
+
+  @override
+  String toString() {
+    return id;
   }
 }
 
@@ -76,19 +104,19 @@ class Catalyst {
 }
 
 class CatalystChain {
-  const CatalystChain({required this.initial, required this.direction, required this.stages});
+  const CatalystChain({required this.initial, required this.toPater, required this.stages});
 
   CatalystChain.fromJson(dynamic map) : this.fromMap(map);
 
   CatalystChain.fromMap(Map<String, dynamic> map)
       : this(
           initial: Catalyst.byAbbreviation(map['initial']),
-          direction: map['direction'],
+          toPater: map['direction'] == 'pater',
           stages: UnmodifiableListView(
               (map['stages'] as List<dynamic>).map((e) => Catalyst.byAbbreviation(e)).toList(growable: false)),
         );
 
   final Catalyst initial;
-  final String direction;
+  final bool toPater;
   final UnmodifiableListView<Catalyst> stages;
 }

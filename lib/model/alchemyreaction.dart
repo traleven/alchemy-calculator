@@ -26,7 +26,7 @@ class AlchemyReaction extends ChangeNotifier {
 
   Iterable<String> get log => _log;
 
-  void call(Workbench workbench) {
+  void call(Workbench workbench, Shelf shelf) {
     var chain = workbench.blocks;
     if (chain.isEmpty || !chain.first.hasOperation) return;
     var log = "";
@@ -42,7 +42,7 @@ class AlchemyReaction extends ChangeNotifier {
 
         // Natural reaction
         if (operation.stage < 0) {
-          final child = _directReaction(substance: substance, catalyst: catalyst, operation: operation);
+          final child = _directReaction(substance: substance, catalyst: catalyst, operation: operation, shelf: shelf);
           log += '${child.displayName}\n';
           chain = _progress(workbench, i + 1, child);
           // Concoct brewing
@@ -51,20 +51,16 @@ class AlchemyReaction extends ChangeNotifier {
           log += '${child.displayName}\n';
           chain = _progress(workbench, i + 1, child);
           // Reverse reaction
-        } else if (operation.stage == substance.fullStage) {
-          reactionPath = _filterReactionPaths(
-            reactionPath,
-            substance: substance,
-            catalyst: catalyst,
-            operation: operation,
-          );
+        } else if (operation.fullStage == substance.fullStage) {
+          reactionPath = _filterReactionPaths(reactionPath,
+              substance: substance, catalyst: catalyst, operation: operation, shelf: shelf);
 
           if (null == reactionPath || reactionPath.isEmpty) {
             chain = _progress(workbench, i + 1, const Reactant.shit());
             log += '${const Reactant.shit().displayName}\n';
           } else {
-            var result = _reverseReaction(substance: substance, catalyst: catalyst, operation: operation);
-            bool toPater = reactionPath.first.direction == 'pater';
+            var result = _reverseReaction(substance: substance, catalyst: catalyst, operation: operation, shelf: shelf);
+            bool toPater = reactionPath.first.toPater;
             reactionPath = _resetPath(path: reactionPath, substance: result);
             result = _transmute(substance: result, toPater: toPater);
             log += result.displayName;
@@ -89,8 +85,13 @@ class AlchemyReaction extends ChangeNotifier {
     required Reactant substance,
     required Reactant catalyst,
     required AlchemyOperation operation,
+    required Shelf shelf,
   }) {
     if (operation.regnum.isNotEmpty && operation.regnum != substance.regnum) return const Reactant.shit();
+    if (!operation.acceptSubstance(substance, shelf) || !operation.acceptCatalyst(catalyst, shelf)) {
+      return const Reactant.shit();
+    }
+
     final child = _shelf.findReactantWhere((reactant) => reactant.isChildOf(substance.nomen, catalyst.nomen)) ??
         const Reactant.shit();
     return child;
@@ -111,21 +112,27 @@ class AlchemyReaction extends ChangeNotifier {
     required Reactant substance,
     required Reactant catalyst,
     required AlchemyOperation operation,
+    required Shelf shelf,
   }) {
     if (substance.stage == 0 && null == reactionPath) {
-      reactionPath = _shelf.findAllCatalystChains((cat) => cat.initial.includes(substance.group));
+      reactionPath = _shelf.findAllCatalystChains((chain) => chain.initial.includes(substance.group));
     }
-    return reactionPath?.where((cat) => cat.stages[operation.stage].includes(catalyst.group));
+    return reactionPath?.where((chain) => chain.stages[operation.fullStage].includes(catalyst.group));
   }
 
   Reactant _reverseReaction({
     required Reactant substance,
     required Reactant catalyst,
     required AlchemyOperation operation,
+    required Shelf shelf,
   }) {
     if (substance.color != catalyst.color) return const Reactant.shit();
+
     if (Shelf.checkSupport(regnum: catalyst.regnum, supports: substance.regnum)) return const Reactant.shit();
-    if (!operation.acceptSubstance(substance) || !operation.acceptCatalyst(catalyst)) return const Reactant.shit();
+    if (!operation.acceptSubstance(substance, shelf) || !operation.acceptCatalyst(catalyst, shelf)) {
+      return const Reactant.shit();
+    }
+
     if (!Shelf.sameRegnum([substance.regnum, catalyst.regnum]) && substance.stage == 0 && substance.potion == null) {
       substance = substance.withValues(potion: Potion(regnum: operation.regnum), solid: operation.resultState);
     }

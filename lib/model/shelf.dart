@@ -193,7 +193,7 @@ class Shelf extends ChangeNotifier {
   Iterable<AlchemyOperation> get _filteredOperations {
     return _operations.where((e) =>
         (_operationsRegnumFilter.isEmpty || e.regnum.isEmpty || _operationsRegnumFilter.contains(e.regnum)) &&
-        (_operationStageFilter.isEmpty || _operationStageFilter.contains(e.stage)));
+        (_operationStageFilter.isEmpty || _operationStageFilter.contains(e.fullStage)));
   }
 
   Iterable<Reactant> get _filteredReactants {
