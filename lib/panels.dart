@@ -62,7 +62,7 @@ class LogPanel extends StatelessWidget {
         body: ListView(
           primary: false,
           children: [
-            for (final item in reaction.log) Row(children: [Text(item, style: defaultTextStyle)])
+            for (final item in reaction.log) Row(children: [Flexible(child: Text(item, style: defaultTextStyle))])
           ],
         ),
         floatingActionButton: IconButton(

@@ -29,7 +29,7 @@ class AlchemyReaction extends ChangeNotifier {
   void call(Workbench workbench) {
     var chain = workbench.blocks;
     if (chain.isEmpty || !chain.first.hasOperation) return;
-    var log = "";
+    var log = '';
 
     try {
       Iterable<CatalystChain>? reactionPath;
@@ -38,6 +38,7 @@ class AlchemyReaction extends ChangeNotifier {
         final substance = chain[i].base!;
         final catalyst = chain[i].catalyst!;
         final operation = chain[i].operation!;
+        log += '${operation.regnum.regnumSymbol} ';
         log += '(${substance.displayName}) + (${catalyst.displayName}) =[${operation.displayName}]=> ';
 
         // Natural reaction
@@ -46,33 +47,44 @@ class AlchemyReaction extends ChangeNotifier {
           log += '${child.displayName}\n';
           chain = _progress(workbench, i + 1, child);
           // Concoct brewing
-        } else if (substance.stage == 0 && substance.potion != null) {
-          final child = _concoctReaction(substance: substance, catalyst: catalyst, operation: operation);
-          log += '${child.displayName}\n';
-          chain = _progress(workbench, i + 1, child);
+        } else if (substance.isPotion) {
+          final result = _concoctReaction(substance: substance, catalyst: catalyst, operation: operation);
+          log += result.displayName;
+          if (result.isPotion) {
+            //log += ' (${result.displayNomen})';
+            _shelf.registerPotion(result);
+          }
+          log += '\n';
+          chain = _progress(workbench, i + 1, result);
           // Reverse reaction
         } else if (operation.fullStage == substance.fullStage) {
           reactionPath =
               _filterReactionPaths(reactionPath, substance: substance, catalyst: catalyst, operation: operation);
 
-          if (null == reactionPath || reactionPath.isEmpty) {
-            chain = _progress(workbench, i + 1, const Reactant.shit());
+          if (null == reactionPath || reactionPath.isEmpty || catalyst.potion != null) {
             log += '${const Reactant.shit().displayName}\n';
-          } else {
+            chain = _progress(workbench, i + 1, const Reactant.shit());
+          } else if (substance.stage % 2 == 0 ||
+              catalyst.colorDescription == substance.colorDescription ||
+              chain[i - 1].catalyst?.colorDescription == substance.colorDescription) {
             var result = _reverseReaction(substance: substance, catalyst: catalyst, operation: operation);
             bool toPater = reactionPath.first.toPater;
             reactionPath = _resetPath(path: reactionPath, substance: result);
             result = _transmute(substance: result, toPater: toPater);
             log += result.displayName;
             if (result.isPotion) {
-              log += ' ${Shelf.buildPotionEffect(result)}';
+              //log += ' (${result.displayNomen})';
+              _shelf.registerPotion(result);
             }
             log += '\n';
             chain = _progress(workbench, i + 1, result);
+          } else {
+            log += '${const Reactant.shit().displayName}\n';
+            chain = _progress(workbench, i + 1, const Reactant.shit());
           }
         } else {
-          chain = _progress(workbench, i + 1, const Reactant.shit());
           log += '${const Reactant.shit().displayName}\n';
+          chain = _progress(workbench, i + 1, const Reactant.shit());
         }
       }
     } finally {
@@ -87,12 +99,17 @@ class AlchemyReaction extends ChangeNotifier {
     required AlchemyOperation operation,
   }) {
     if (operation.regnum.isNotEmpty && operation.regnum != substance.regnum) return const Reactant.shit();
-    if (!operation.acceptSubstance(substance, _shelf) || !operation.acceptCatalyst(catalyst, _shelf)) {
+
+    final child = _shelf.findReactantWhere((reactant) => reactant.isChildOf(substance.nomen, catalyst.nomen));
+    if (child == null) return const Reactant.shit();
+
+    Reactant? pater = _shelf.findReactant(child.pater);
+    Reactant? mater = _shelf.findReactant(child.mater);
+    if (pater == null || mater == null) return const Reactant.shit();
+
+    if (!operation.acceptSubstance(pater, _shelf) || !operation.acceptCatalyst(mater, _shelf)) {
       return const Reactant.shit();
     }
-
-    final child = _shelf.findReactantWhere((reactant) => reactant.isChildOf(substance.nomen, catalyst.nomen)) ??
-        const Reactant.shit();
     return child;
   }
 
@@ -101,9 +118,17 @@ class AlchemyReaction extends ChangeNotifier {
     required Reactant catalyst,
     required AlchemyOperation operation,
   }) {
-    if (substance.potion == null || catalyst.potion == null) return const Reactant.shit();
+    if (!substance.isPotion || !catalyst.isPotion || catalyst is Concoct) return const Reactant.shit();
+    if (!operation.acceptSubstance(substance, _shelf) || !operation.acceptCatalyst(catalyst, _shelf)) {
+      return const Reactant.shit();
+    }
 
-    return substance;
+    final concoct = substance.concoct();
+    if (!Shelf.sameRegnum([concoct.regnum, catalyst.potion!.regnum, operation.regnum])) return const Reactant.shit();
+    if (!Shelf.checkSupport(regnum: catalyst.regnum, supports: concoct.potions.last.regnum)) {
+      return const Reactant.shit();
+    }
+    return substance.concoct().merge(catalyst);
   }
 
   Iterable<CatalystChain>? _filterReactionPaths(
@@ -140,13 +165,20 @@ class AlchemyReaction extends ChangeNotifier {
       substance = substance.withValues(potion: Potion(regnum: operation.regnum), solid: operation.resultState);
     }
     if (substance.potion == null) {
-      // Not a potiohn
+      // Not a potion
       if (!Shelf.sameRegnum([substance.regnum, catalyst.regnum, operation.regnum])) return const Reactant.shit();
-      return substance.withValues(stage: substance.stage + step, solid: operation.resultState);
+      return substance.withValues(
+        stage: substance.stage + step,
+        solid: operation.resultState,
+      );
     } else {
       // Potion
       if (Shelf.sameRegnum([substance.regnum, catalyst.regnum])) return const Reactant.shit();
-      return substance.withValues(stage: substance.stage + step, regnum: catalyst.regnum, solid: operation.resultState);
+      return substance.withValues(
+        stage: substance.stage + step,
+        regnum: ((substance.stage + step) % 2 == 0) ? catalyst.regnum : null,
+        solid: operation.resultState,
+      );
     }
   }
 
@@ -160,20 +192,6 @@ class AlchemyReaction extends ChangeNotifier {
     if (null == pater?.colorDescription && null == mater?.colorDescription) {
       if (substance.colorDescription != catalyst.colorDescription) return 0;
       return 2;
-    } else if (null != pater?.quality && null != mater?.colorDescription) {
-      if (mater?.colorDescription == catalyst.colorDescription &&
-          catalyst.colorDescription!.paterQuality == pater?.quality) {
-        if (catalyst.colorDescription != substance.colorDescription) return 0;
-        return 2;
-      } else if (mater?.colorDescription == catalyst.colorDescription) {
-        if (catalyst.colorDescription != substance.colorDescription) return 0;
-        return -1; // to mater
-      } else if (catalyst.colorDescription!.paterQuality == pater?.quality) {
-        if (pater?.quality != substance.colorDescription?.paterQuality) return 0;
-        return 1; // to pater
-      } else {
-        return 0;
-      }
     } else if (null != pater?.colorDescription && null != mater?.colorDescription) {
       if (pater?.colorDescription == mater?.colorDescription) {
         if (catalyst.colorDescription != substance.colorDescription) return 0;
@@ -182,6 +200,18 @@ class AlchemyReaction extends ChangeNotifier {
         return 1; // to pater
       } else if (mater?.colorDescription == substance.colorDescription) {
         return -1; // to mater
+      } else {
+        return 0;
+      }
+    } else if (null != pater?.quality && null != mater?.colorDescription) {
+      if (mater?.colorDescription == catalyst.colorDescription &&
+          catalyst.colorDescription!.paterQuality == pater?.quality) {
+        if (catalyst.colorDescription != substance.colorDescription) return 0;
+        return 2;
+      } else if (mater?.colorDescription == substance.colorDescription) {
+        return -1; // to mater
+      } else if (substance.colorDescription!.paterQuality == pater?.quality) {
+        return 1; // to pater
       } else {
         return 0;
       }
@@ -197,7 +227,12 @@ class AlchemyReaction extends ChangeNotifier {
     return (substance.stage < 6
             ? substance
             : substance.potion != null
-                ? substance.withValues(stage: 0, elixir: toPater)
+                ? substance.withValues(
+                    stage: 0,
+                    elixir: toPater,
+                    principle: _shelf.getPrinciple(
+                        potion: substance.potion!.regnum, substance: substance.regnum, elixir: toPater),
+                  )
                 : toPater
                     ? substance.getPater(_shelf)
                     : substance.getMater(_shelf)) ??

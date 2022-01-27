@@ -70,20 +70,25 @@ class Reactant {
       ? 'Микстура'
       : potion == null
           ? nomen
-          : nomen; //: 'Принцип: Coagulatio (усиливает свойство, ускоряет процесс); Аспект: ♋️ (психометрия, психоскопия).';
+          : '${potion!.regnum.regnumSymbol}${potion!.displayPrincipleDirection}${regnum.regnumSymbol}$_namePrefix $nomen';
 
   String get displayName => stage != 0
       ? 'Unstable something'
       : potion == null
-          ? (colorDescription != null ? '${colorDescription!.symbol} ' : '') +
-              (groupId.isNotEmpty ? '$groupId ' : '') +
-              (name.isNotEmpty ? name : nomen)
-          : '${potion!.displaySolidState} (Эффект: ${potion!.regnum.regnumSymbol}; База: $nomen)';
+          ? [_namePrefix, (name.isNotEmpty ? name : nomen)].join(' ')
+          : potionEffect;
+  String get _namePrefix =>
+      (colorDescription != null ? colorDescription!.symbol : '') + (groupId.isNotEmpty ? groupId : '');
 
   int get fullStage => stage ~/ 2;
   String get displaySolidState => isSolid.solidState();
   bool get hasSolidState => quality == null || quality! >= 0;
   bool get isPotion => stage == 0 && potion?.isElixir != null;
+
+  String get potionEffect {
+    if (!isPotion) return '';
+    return Shelf.buildPotionEffect(this);
+  }
 
   @override
   String toString() {
@@ -101,6 +106,7 @@ class Reactant {
           String? regnum,
           Potion? potion,
           bool? elixir,
+          String? principle,
           String? groupId,
           ColorDescription? colorDescription}) =>
       Reactant(
@@ -117,27 +123,156 @@ class Reactant {
         colorDescription: colorDescription ?? this.colorDescription,
         quality: quality,
         stage: stage ?? this.stage,
-        potion: (potion ?? this.potion)?.brewed(asElixir: elixir),
+        potion: (potion ?? this.potion)?.brewed(asElixir: elixir, principle: principle),
       );
 
   bool isChildOf(String one, String another) =>
       (pater == one && mater == another) || (mater == one && pater == another);
+
+  Concoct concoct() {
+    return Concoct._fromReactant(this);
+  }
+}
+
+class Concoct implements Reactant {
+  const Concoct({
+    required this.regnum,
+    this.isSolid = true,
+    this.quality,
+    required this.potions,
+  });
+
+  factory Concoct._fromReactant(Reactant reactant) {
+    return Concoct(
+      regnum: reactant.potion?.regnum ?? '',
+      isSolid: reactant.isSolid,
+      quality: reactant.quality,
+      potions: [reactant],
+    );
+  }
+
+  @override
+  final String regnum;
+  @override
+  String get nomen =>
+      _namePrefix + potions.map((e) => e.displayNomen.substring(e.displayNomen.characters.first.length)).join('; ');
+  @override
+  String get name =>
+      _namePrefix + ' ' + potions.map((e) => e.displayName.substring(e.displayName.characters.first.length)).join('; ');
+  @override
+  final bool isSolid;
+
+  @override
+  final int? quality;
+
+  @override
+  int get circle => -1;
+
+  @override
+  String get group => '';
+  @override
+  String get groupId => '';
+  @override
+  String get pater => '';
+  @override
+  String get mater => '';
+
+  @override
+  Color? get color => null;
+
+  @override
+  ColorDescription? get colorDescription => null;
+
+  @override
+  int get stage => 0;
+
+  @override
+  int get fullStage => stage ~/ 2;
+
+  @override
+  String get displayNomen => potions.length == 1 ? potions[0].displayNomen : nomen;
+
+  @override
+  String get displayName => potions.length == 1 ? potions[0].displayName : name;
+
+  @override
+  String get _namePrefix => 'C${regnum.regnumSymbol}:';
+
+  @override
+  String get displaySolidState => isSolid.solidState();
+
+  @override
+  bool get hasSolidState => true;
+
+  @override
+  bool get isPotion => true;
+
+  @override
+  String get potionEffect => throw UnimplementedError();
+
+  @override
+  String toString() {
+    return name.isNotEmpty ? name : nomen;
+  }
+
+  @override
+  bool isChildOf(String one, String another) => false;
+
+  @override
+  Potion? get potion => null;
+
+  final List<Reactant> potions;
+
+  @override
+  Concoct withValues(
+          {int? stage,
+          bool? solid,
+          String? regnum,
+          Potion? potion,
+          bool? elixir,
+          String? principle,
+          String? groupId,
+          ColorDescription? colorDescription}) =>
+      Concoct(
+        regnum: regnum ?? this.regnum,
+        isSolid: solid ?? isSolid,
+        quality: quality,
+        potions: [],
+      );
+
+  Reactant merge(Reactant other) {
+    if (!other.isPotion) return this;
+    final result = Concoct(regnum: regnum, potions: [...potions, ...other.concoct().potions]);
+    if (result.potions.length >= 3) return const Reactant.shit();
+    final principles = result.potions.map((e) => e.potion!.principle).toSet();
+    if (result.potions.length != principles.length) return const Reactant.shit();
+    final aspects = result.potions.map((e) => '${e.colorDescription?.symbol}${e.groupId}');
+    if (result.potions.length != aspects.length) return const Reactant.shit();
+
+    return result;
+  }
+
+  @override
+  Concoct concoct() {
+    return this;
+  }
 }
 
 class Potion {
-  const Potion({required this.regnum, this.isElixir});
+  const Potion({required this.regnum, this.isElixir, this.principle});
 
   final String regnum;
   final bool? isElixir;
+  final String? principle;
 
-  String get displaySolidState => isElixir == null
+  String get displayPrincipleDirection => isElixir == null
       ? '_'
       : isElixir!
-          ? 'Эликсир'
-          : 'Тинктура';
+          ? '\u{1F756}'
+          : '\u{1F768}';
 
-  Potion? brewed({bool? asElixir}) {
-    return asElixir != null ? Potion(regnum: regnum, isElixir: asElixir) : this;
+  Potion? brewed({bool? asElixir, String? principle}) {
+    return asElixir != null ? Potion(regnum: regnum, isElixir: asElixir, principle: principle) : this;
   }
 }
 

@@ -200,12 +200,21 @@ class Shelf extends ChangeNotifier {
 
   Iterable<Reactant> get _filteredReactants {
     return _data.values.where((e) =>
-        (!_reactantPotionFilter || e.potion != null) &&
-        (_reactantRegnumFilter.isEmpty || e.regnum.isEmpty || _reactantRegnumFilter.contains(e.regnum)) &&
+        (_reactantPotionFilter == e.isPotion) &&
+        (_reactantRegnumFilter.isEmpty || _getRegnum(e).isEmpty || _reactantRegnumFilter.contains(_getRegnum(e))) &&
         (_reactantGroupFilter.isEmpty || e.group.isEmpty || _reactantGroupFilter.any((id) => e.group.contains(id))) &&
         (_reactantColorFilter.isEmpty ||
             _reactantColorFilter.contains(e.color) ||
             (e.color == null && _reactantColorFilter.contains(Colors.transparent))));
+  }
+
+  static String _getRegnum(Reactant reactant) => reactant.potion?.regnum ?? reactant.regnum;
+
+  void registerPotion(Reactant reactant) {
+    if (reactant.isPotion) {
+      _data[reactant.displayNomen] = reactant;
+      notifyListeners();
+    }
   }
 
   static bool checkSupport({required String regnum, required String supports}) {
@@ -220,8 +229,11 @@ class Shelf extends ChangeNotifier {
   static String buildPotionEffect(Reactant reactant) {
     if (!reactant.isPotion) return 'Гажа';
     String? principle = _principles[reactant.potion!.regnum]?[reactant.regnum]?[reactant.potion!.isElixir];
-    return 'Принцип: $principle; Аспект: ${getIdForGroup(reactant.group)}';
+    return '${reactant.potion!.regnum.regnumSymbol}${reactant.potion!.displayPrincipleDirection} $principle ${reactant.colorDescription?.symbol}${reactant.groupId}';
   }
+
+  String? getPrinciple({required String potion, required String substance, required bool elixir}) =>
+      _principles[potion]?[substance]?[elixir];
 }
 
 class ColorDescription {

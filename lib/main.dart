@@ -71,7 +71,7 @@ class PageComposition extends StatelessWidget {
 
   Widget get _page {
     return const VerticalSplitView(
-      ratio: 0.75,
+      ratio: 0.6,
       left: HorizontalSplitView(ratio: 0.8, upper: WorkbenchPanel(), lower: LogPanel()),
       right: HorizontalSplitView(ratio: 0.3, upper: OperationsPanel(), lower: ReactantsPanel()),
     );
