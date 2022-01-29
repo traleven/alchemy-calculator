@@ -1,0 +1,1147 @@
+{
+    "principles": [
+        {
+            "nomen": "SEPARATIO",
+            "name": "я разделяю",
+            "description": [
+                "уничтожает, убирает свойство",
+                "уничтожает аспект, отменяет проявление, ломает аспект",
+                "уничтожает, убирает свойство"
+            ],
+            "toPater": true
+        },
+        {
+            "nomen": "CERATIO",
+            "name": "я размягчаю",
+            "description": [
+                "ослабляет свойство",
+                "ослабляет свойство, замедляет процесс",
+                "ослабляет свойство"
+            ],
+            "toPater": false
+        },
+        {
+            "nomen": "FIXATIO ",
+            "name": "я фиксирую",
+            "description": [
+                "преотвращает изменение свойства (снимается через solutio)",
+                "предотвращает изменения аспекта",
+                "преотвращает изменение свойства (снимается через solutio)"
+            ],
+            "toPater": true
+        },
+        {
+            "nomen": "SOLVTIO ",
+            "name": "я растворяю",
+            "description": [
+                "снимает эффекты, изменившие свойство",
+                "снимает эффекты, изменившие аспект",
+                "снимает эффекты, изменившие свойство"
+            ],
+            "toPater": false
+        },
+        {
+            "nomen": "COAGVLATIO",
+            "name": "я сгущаю",
+            "description": [
+                "усиливает свойство",
+                "усиливает свойство, ускоряет процесс",
+                "усиливает свойство"
+            ],
+            "toPater": true
+        },
+        {
+            "nomen": "CONIVNCTIO",
+            "name": "я соединяю",
+            "description": [
+                "добавляет свойство",
+                "добавляет аспект, которого раньше не было",
+                "добавляет свойство"
+            ],
+            "toPater": false
+        }
+    ],
+    "aspects": [
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♈",
+            "name": "свойство стихии огня"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♌",
+            "name": "смелость, отвага"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♐",
+            "name": "удача"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♎",
+            "name": "свойство стихии воздуха"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♒",
+            "name": "прозрачность"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♊",
+            "name": "insight, озарение, прозрение"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♋",
+            "name": "ствойство стихии воды"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♏",
+            "name": "связь тонкого (души) и плотного (тела)"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♓",
+            "name": "витальность, признаки жизни (пульс, дыхание, температура)"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♑",
+            "name": "свойство стихии земли"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♉",
+            "name": "воля, выдержка, решительность"
+        },
+        {
+            "regnum": 1,
+            "color": "#f4cccc",
+            "sign": "♍",
+            "name": "очень быстрое лечение ран, ушибов, переломов, и т.п."
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♈",
+            "name": "терморегуляция"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♌",
+            "name": "физ. тонус"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♐",
+            "name": "регенерация"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♎",
+            "name": "сновидение"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♒",
+            "name": "милосердие"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♊",
+            "name": "безумие, бред"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♋",
+            "name": "сон, анабиоз"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♏",
+            "name": "физическая боль"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♓",
+            "name": "галлюцинации, иллюзии, видения"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♑",
+            "name": "кости, зубы"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♉",
+            "name": "мимикрия (хамелеон)"
+        },
+        {
+            "regnum": 1,
+            "color": "#ffffff",
+            "sign": "♍",
+            "name": "плоть"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♈",
+            "name": "эйфория"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♌",
+            "name": "харизма, обаяние"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♐",
+            "name": "веселье"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♎",
+            "name": "красота"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♒",
+            "name": "гедонизм"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♊",
+            "name": "зрение"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♋",
+            "name": "любовь, привязанность"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♏",
+            "name": "женственность (пол)"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♓",
+            "name": "либидо (эрос, потенция)"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♑",
+            "name": "мания, фанатизм"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♉",
+            "name": "фертильность"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9ead3",
+            "sign": "♍",
+            "name": "осязание"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♈",
+            "name": "транс, шаманский экстаз"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♌",
+            "name": "мана, энергия"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♐",
+            "name": "радость (happiness, excitement, mirth)"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♎",
+            "name": "интуиция, предчувствие, clear sight"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♒",
+            "name": "воображение, фантазия"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♊",
+            "name": "левитация, полет"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♋",
+            "name": "эмпатия (чувства людей)"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♏",
+            "name": "физическое насыщение (питание)"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♓",
+            "name": "метаболизм"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♑",
+            "name": "устойчивость к магии"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♉",
+            "name": "вкус"
+        },
+        {
+            "regnum": 1,
+            "color": "#cfe2f3",
+            "sign": "♍",
+            "name": "голос"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♈",
+            "name": "ярость"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♌",
+            "name": "мужественность (пол)"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♐",
+            "name": "оборотничество (shapeshifting)"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♎",
+            "name": "дыхание"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♒",
+            "name": "мелкая моторика"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♊",
+            "name": "кровь"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♋",
+            "name": "зоопатия (чувства животных)"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♏",
+            "name": "иммунитет"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♓",
+            "name": "физ. сила"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♑",
+            "name": "выносливость"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♉",
+            "name": "вирильность"
+        },
+        {
+            "regnum": 1,
+            "color": "#e6b8af",
+            "sign": "♍",
+            "name": "кожа, покровы"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♈",
+            "name": "быстрота"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♌",
+            "name": "телекинез"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♐",
+            "name": "смекалка, сообразительность"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♎",
+            "name": "красноречие, дар речи"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♒",
+            "name": "интеллект, логика"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♊",
+            "name": "мышление, сознание"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♋",
+            "name": "мудрость"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♏",
+            "name": "бионавигация (чувство направления, компас)"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♓",
+            "name": "ловкость"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♑",
+            "name": "слух"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♉",
+            "name": "обоняние"
+        },
+        {
+            "regnum": 1,
+            "color": "#fff2cc",
+            "sign": "♍",
+            "name": "скрытность (stealth)"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♈",
+            "name": "скорость реакции"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♌",
+            "name": "совесть"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♐",
+            "name": "внимание"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♎",
+            "name": "телепатия"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♒",
+            "name": "нервная проводимость, ЦНС"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♊",
+            "name": "любознательность, любопытство"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♋",
+            "name": "психометрия, психоскопия"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♏",
+            "name": "автогения (способность тела выделять ядовитый газ)"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♓",
+            "name": "амфибицизм"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♑",
+            "name": "память"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♉",
+            "name": "спокойствие, уравновешенность"
+        },
+        {
+            "regnum": 1,
+            "color": "#fce5cd",
+            "sign": "♍",
+            "name": "огнестойкость"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♈",
+            "name": "ненависть"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♌",
+            "name": "гордыня"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♐",
+            "name": "алчность"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♎",
+            "name": "подлость, предательство, измена"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♒",
+            "name": "случайная мутация"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♊",
+            "name": "хитрость, обман, ложь"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♋",
+            "name": "зависть (черная, белая, ревность)"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♏",
+            "name": "похоть"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♓",
+            "name": "жажда"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♑",
+            "name": "подавленность, уныние, печаль"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♉",
+            "name": "голод"
+        },
+        {
+            "regnum": 1,
+            "color": "#d9d2e9",
+            "sign": "♍",
+            "name": "морозоустойчивость"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♈",
+            "name": "эгоизм, себялюбие"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♌",
+            "name": "болезни огня (жар, воспаление, серд.сос.заб.)"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♐",
+            "name": "медиумизм"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♎",
+            "name": "старение"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♒",
+            "name": "болезни воздуха (кашель, сыпь, легкие)"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♊",
+            "name": "леность, апатия, прокрастинация"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♋",
+            "name": "отчаяние, горе"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♏",
+            "name": "болезни воды (отеки, опухоли, суставы)"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♓",
+            "name": "страх"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♑",
+            "name": "смерть"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♉",
+            "name": "болезни земли (нагноения, нарывы, кости)"
+        },
+        {
+            "regnum": 1,
+            "color": "#b7b7b7",
+            "sign": "♍",
+            "name": "естественная броня (панцирь, чешуя, др.)"
+        },
+        {
+            "regnum": 0,
+            "color": "#f4cccc",
+            "sign": "♈♌♐",
+            "name": "Теплоемкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#f4cccc",
+            "sign": "♎♒♊",
+            "name": "Летучесть (способность испаряться)"
+        },
+        {
+            "regnum": 0,
+            "color": "#f4cccc",
+            "sign": "♋♏♓",
+            "name": "Плавкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#f4cccc",
+            "sign": "♑♉♍",
+            "name": "Вес"
+        },
+        {
+            "regnum": 0,
+            "color": "#ffffff",
+            "sign": "♈♌♐",
+            "name": "Электропроводность"
+        },
+        {
+            "regnum": 0,
+            "color": "#ffffff",
+            "sign": "♎♒♊",
+            "name": "Манапроводность"
+        },
+        {
+            "regnum": 0,
+            "color": "#ffffff",
+            "sign": "♋♏♓",
+            "name": "Растворимость"
+        },
+        {
+            "regnum": 0,
+            "color": "#ffffff",
+            "sign": "♑♉♍",
+            "name": "Устойчивость к коррозии"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9ead3",
+            "sign": "♈♌♐",
+            "name": "Блеск (отражение света)"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9ead3",
+            "sign": "♎♒♊",
+            "name": "Гибкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9ead3",
+            "sign": "♋♏♓",
+            "name": "Эластичность, упругость"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9ead3",
+            "sign": "♑♉♍",
+            "name": "Звукопроводность"
+        },
+        {
+            "regnum": 0,
+            "color": "#cfe2f3",
+            "sign": "♈♌♐",
+            "name": "Электроемкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#cfe2f3",
+            "sign": "♎♒♊",
+            "name": "Манаемкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#cfe2f3",
+            "sign": "♋♏♓",
+            "name": "Рефракция (преломление)"
+        },
+        {
+            "regnum": 0,
+            "color": "#cfe2f3",
+            "sign": "♑♉♍",
+            "name": "Дисперсия (радужность)"
+        },
+        {
+            "regnum": 0,
+            "color": "#e6b8af",
+            "sign": "♈♌♐",
+            "name": "Теплопроводность"
+        },
+        {
+            "regnum": 0,
+            "color": "#e6b8af",
+            "sign": "♎♒♊",
+            "name": "Магнетизм"
+        },
+        {
+            "regnum": 0,
+            "color": "#e6b8af",
+            "sign": "♋♏♓",
+            "name": "Ковкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#e6b8af",
+            "sign": "♑♉♍",
+            "name": "Твердость"
+        },
+        {
+            "regnum": 0,
+            "color": "#fff2cc",
+            "sign": "♈♌♐",
+            "name": "Горючесть"
+        },
+        {
+            "regnum": 0,
+            "color": "#fff2cc",
+            "sign": "♎♒♊",
+            "name": "Прозрачность"
+        },
+        {
+            "regnum": 0,
+            "color": "#fff2cc",
+            "sign": "♋♏♓",
+            "name": "Мылкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#fff2cc",
+            "sign": "♑♉♍",
+            "name": "Окрас"
+        },
+        {
+            "regnum": 0,
+            "color": "#fce5cd",
+            "sign": "♈♌♐",
+            "name": "Люминесценция (свечение)"
+        },
+        {
+            "regnum": 0,
+            "color": "#fce5cd",
+            "sign": "♎♒♊",
+            "name": "Плавучесть"
+        },
+        {
+            "regnum": 0,
+            "color": "#fce5cd",
+            "sign": "♋♏♓",
+            "name": "Смачиваемость"
+        },
+        {
+            "regnum": 0,
+            "color": "#fce5cd",
+            "sign": "♑♉♍",
+            "name": "Хрупкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9d2e9",
+            "sign": "♈♌♐",
+            "name": "Едкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9d2e9",
+            "sign": "♎♒♊",
+            "name": "Жгучесть"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9d2e9",
+            "sign": "♋♏♓",
+            "name": "Вязкость"
+        },
+        {
+            "regnum": 0,
+            "color": "#d9d2e9",
+            "sign": "♑♉♍",
+            "name": "Липкость (трение)"
+        },
+        {
+            "regnum": 0,
+            "color": "#b7b7b7",
+            "sign": "♈♌♐",
+            "name": "Старение материала"
+        },
+        {
+            "regnum": 0,
+            "color": "#b7b7b7",
+            "sign": "♎♒♊",
+            "name": "Высыхаемость"
+        },
+        {
+            "regnum": 0,
+            "color": "#b7b7b7",
+            "sign": "♋♏♓",
+            "name": "Морозоустойчивость"
+        },
+        {
+            "regnum": 0,
+            "color": "#b7b7b7",
+            "sign": "♑♉♍",
+            "name": "Однородность (vs пористость)"
+        },
+        {
+            "regnum": 2,
+            "color": "#f4cccc",
+            "sign": "♈♌♐",
+            "name": "Свойства стихии огня"
+        },
+        {
+            "regnum": 2,
+            "color": "#f4cccc",
+            "sign": "♎♒♊",
+            "name": "Свойства стихии воздуха"
+        },
+        {
+            "regnum": 2,
+            "color": "#f4cccc",
+            "sign": "♋♏♓",
+            "name": "Свойства стихии воды"
+        },
+        {
+            "regnum": 2,
+            "color": "#f4cccc",
+            "sign": "♑♉♍",
+            "name": "Свойства стихии земли"
+        },
+        {
+            "regnum": 2,
+            "color": "#ffffff",
+            "sign": "♈♌♐",
+            "name": "Регенерация"
+        },
+        {
+            "regnum": 2,
+            "color": "#ffffff",
+            "sign": "♎♒♊",
+            "name": "Манапроводность"
+        },
+        {
+            "regnum": 2,
+            "color": "#ffffff",
+            "sign": "♋♏♓",
+            "name": "Сон, анабиоз"
+        },
+        {
+            "regnum": 2,
+            "color": "#ffffff",
+            "sign": "♑♉♍",
+            "name": "Мимикрия"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9ead3",
+            "sign": "♈♌♐",
+            "name": "Красота"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9ead3",
+            "sign": "♎♒♊",
+            "name": "Гибкость"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9ead3",
+            "sign": "♋♏♓",
+            "name": "Эластичность, упругость"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9ead3",
+            "sign": "♑♉♍",
+            "name": "Плодородие"
+        },
+        {
+            "regnum": 2,
+            "color": "#cfe2f3",
+            "sign": "♈♌♐",
+            "name": "Рост"
+        },
+        {
+            "regnum": 2,
+            "color": "#cfe2f3",
+            "sign": "♎♒♊",
+            "name": "Манаемкость"
+        },
+        {
+            "regnum": 2,
+            "color": "#cfe2f3",
+            "sign": "♋♏♓",
+            "name": "Физическое насыщение (питание)"
+        },
+        {
+            "regnum": 2,
+            "color": "#cfe2f3",
+            "sign": "♑♉♍",
+            "name": "Устойчивость к магии"
+        },
+        {
+            "regnum": 2,
+            "color": "#e6b8af",
+            "sign": "♈♌♐",
+            "name": "Метаболизм"
+        },
+        {
+            "regnum": 2,
+            "color": "#e6b8af",
+            "sign": "♎♒♊",
+            "name": "Кора, колючки, шипы"
+        },
+        {
+            "regnum": 2,
+            "color": "#e6b8af",
+            "sign": "♋♏♓",
+            "name": "Иммунитет"
+        },
+        {
+            "regnum": 2,
+            "color": "#e6b8af",
+            "sign": "♑♉♍",
+            "name": "Твердость"
+        },
+        {
+            "regnum": 2,
+            "color": "#fff2cc",
+            "sign": "♈♌♐",
+            "name": "Огнестойкость"
+        },
+        {
+            "regnum": 2,
+            "color": "#fff2cc",
+            "sign": "♎♒♊",
+            "name": "Прозрачность"
+        },
+        {
+            "regnum": 2,
+            "color": "#fff2cc",
+            "sign": "♋♏♓",
+            "name": "Сочность"
+        },
+        {
+            "regnum": 2,
+            "color": "#fff2cc",
+            "sign": "♑♉♍",
+            "name": "Окрас"
+        },
+        {
+            "regnum": 2,
+            "color": "#fce5cd",
+            "sign": "♈♌♐",
+            "name": "Люминесценция (свечение)"
+        },
+        {
+            "regnum": 2,
+            "color": "#fce5cd",
+            "sign": "♎♒♊",
+            "name": "Плавучесть"
+        },
+        {
+            "regnum": 2,
+            "color": "#fce5cd",
+            "sign": "♋♏♓",
+            "name": "Смачиваемость"
+        },
+        {
+            "regnum": 2,
+            "color": "#fce5cd",
+            "sign": "♑♉♍",
+            "name": "Хрупкость"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9d2e9",
+            "sign": "♈♌♐",
+            "name": "Смолистость"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9d2e9",
+            "sign": "♎♒♊",
+            "name": "Жгучесть"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9d2e9",
+            "sign": "♋♏♓",
+            "name": "Автогения (способность вырабатывать яды)"
+        },
+        {
+            "regnum": 2,
+            "color": "#d9d2e9",
+            "sign": "♑♉♍",
+            "name": "Липкость"
+        },
+        {
+            "regnum": 2,
+            "color": "#b7b7b7",
+            "sign": "♈♌♐",
+            "name": "Старение"
+        },
+        {
+            "regnum": 2,
+            "color": "#b7b7b7",
+            "sign": "♎♒♊",
+            "name": "Высыхаемость"
+        },
+        {
+            "regnum": 2,
+            "color": "#b7b7b7",
+            "sign": "♋♏♓",
+            "name": "Морозоустойчивость"
+        },
+        {
+            "regnum": 2,
+            "color": "#b7b7b7",
+            "sign": "♑♉♍",
+            "name": "Смерть"
+        }
+    ],
+    "potions": []
+}
