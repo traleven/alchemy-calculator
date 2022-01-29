@@ -1,3 +1,4 @@
+import 'package:alchemy_calculator/main.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -145,7 +146,9 @@ class ReactantItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(name),
-            Text(nomen, style: Theme.of(context).textTheme.caption),
+            Text(nomen,
+                style: Theme.of(context).textTheme.caption?.copyWith(
+                    fontFamily: defaultTextStyle.fontFamily, fontFamilyFallback: defaultTextStyle.fontFamilyFallback)),
           ],
         ),
       ],

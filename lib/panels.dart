@@ -125,22 +125,22 @@ class OperationsPanel extends StatelessWidget {
   List<Widget> _buildStageFilterChips(Shelf shelf) {
     final result = [
       FilterChip(
-        label: const Text('Nigredo'),
+        label: const Text('Нигредо'),
         selected: shelf.operationsStageFilterIncludes(0),
         onSelected: (active) => shelf.setOperationStageFilter(0, active),
       ),
       FilterChip(
-        label: const Text('Albedo'),
+        label: const Text('Альбедо'),
         selected: shelf.operationsStageFilterIncludes(1),
         onSelected: (active) => shelf.setOperationStageFilter(1, active),
       ),
       FilterChip(
-        label: const Text('Rubedo'),
+        label: const Text('Рубедо'),
         selected: shelf.operationsStageFilterIncludes(2),
         onSelected: (active) => shelf.setOperationStageFilter(2, active),
       ),
       FilterChip(
-        label: const Text('Other'),
+        label: const Text('Прямое движение'),
         selected: shelf.operationsStageFilterIncludes(-1),
         onSelected: (active) => shelf.setOperationStageFilter(-1, active),
       ),

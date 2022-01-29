@@ -196,7 +196,7 @@ class Concoct implements Reactant {
   String get displayName => potions.length == 1 ? potions[0].displayName : name;
 
   @override
-  String get _namePrefix => 'C${regnum.regnumSymbol}:';
+  String get _namePrefix => '\u{1F74C}${regnum.regnumSymbol}:';
 
   @override
   String get displaySolidState => isSolid.solidState();
@@ -261,7 +261,7 @@ class Potion {
   String get displayPrincipleDirection => isElixir == null
       ? '_'
       : isElixir!
-          ? '\u{1F756}'
+          ? '\u{1F757}'
           : '\u{1F768}';
 
   Potion? brewed({bool? asElixir, String? principle}) {
