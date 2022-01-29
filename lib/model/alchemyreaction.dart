@@ -128,7 +128,14 @@ class AlchemyReaction extends ChangeNotifier {
     if (!Shelf.checkSupport(regnum: catalyst.regnum, supports: concoct.potions.last.regnum)) {
       return const Reactant.shit();
     }
-    return substance.concoct().merge(catalyst);
+    final result = substance.concoct().merge(catalyst);
+    if (result.potions.length >= 3) return const Reactant.shit();
+    final principles = result.potions.map((e) => e.potion!.principle).toSet();
+    if (result.potions.length != principles.length) return const Reactant.shit();
+    final aspects = result.potions.map((e) => '${e.colorDescription?.symbol}${e.groupId}');
+    if (result.potions.length != aspects.length) return const Reactant.shit();
+
+    return result;
   }
 
   Iterable<CatalystChain>? _filterReactionPaths(

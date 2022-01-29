@@ -240,16 +240,9 @@ class Concoct implements Reactant {
         potions: [],
       );
 
-  Reactant merge(Reactant other) {
+  Concoct merge(Reactant other) {
     if (!other.isPotion) return this;
-    final result = Concoct(regnum: regnum, potions: [...potions, ...other.concoct().potions]);
-    if (result.potions.length >= 3) return const Reactant.shit();
-    final principles = result.potions.map((e) => e.potion!.principle).toSet();
-    if (result.potions.length != principles.length) return const Reactant.shit();
-    final aspects = result.potions.map((e) => '${e.colorDescription?.symbol}${e.groupId}');
-    if (result.potions.length != aspects.length) return const Reactant.shit();
-
-    return result;
+    return Concoct(regnum: regnum, potions: [...potions, ...other.concoct().potions]);
   }
 
   @override
