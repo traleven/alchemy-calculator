@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/shelf.dart';
+import '../model/colordescription.dart';
 
 class ColorBox extends Container {
   ColorBox({Key? key, required double size, ColorDescription? color, Widget? child})

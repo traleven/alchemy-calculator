@@ -1,11 +1,14 @@
 import 'package:alchemy_calculator/model/shelf.dart';
 import 'package:flutter/material.dart';
 
-class Reactant {
-  Reactant.fromJson(String regnum, dynamic map) : this.fromMap(regnum, map);
+import 'colordescription.dart';
 
-  Reactant.fromMap(String regnum, Map<String, dynamic> map)
+class Reactant {
+  Reactant.fromJson(Shelf shelf, String regnum, dynamic map) : this.fromMap(shelf, regnum, map);
+
+  Reactant.fromMap(Shelf shelf, String regnum, Map<String, dynamic> map)
       : this(
+            shelf: shelf,
             regnum: regnum,
             nomen: map['nomen'],
             name: map['name'] ?? map['nomen'],
@@ -18,6 +21,7 @@ class Reactant {
             quality: map['quality']);
 
   const Reactant({
+    required Shelf? shelf,
     required this.regnum,
     required this.nomen,
     required this.name,
@@ -32,10 +36,11 @@ class Reactant {
     this.quality,
     this.stage = 0,
     this.potion,
-  });
+  }) : _shelf = shelf;
 
   const Reactant.shit()
-      : regnum = '',
+      : _shelf = null,
+        regnum = '',
         nomen = 'Мертвая Голова',
         name = '🝎 🝎 🝎 Гажа 🝎 🝎 \u{1f74e}',
         isSolid = true,
@@ -50,6 +55,7 @@ class Reactant {
         stage = 0,
         potion = null;
 
+  final Shelf? _shelf;
   final String regnum;
   final String nomen;
   final String name;
@@ -73,7 +79,7 @@ class Reactant {
           : '${potion!.regnum.regnumSymbol}${potion!.displayPrincipleDirection}${regnum.regnumSymbol}$_namePrefix $nomen';
 
   String get displayName => stage != 0
-      ? 'Unstable something'
+      ? 'Нестабильное соединение'
       : potion == null
           ? [_namePrefix, (name.isNotEmpty ? name : nomen)].join(' ')
           : potionEffect;
@@ -87,7 +93,12 @@ class Reactant {
 
   String get potionEffect {
     if (!isPotion) return '';
-    return Shelf.buildPotionEffect(this);
+    return _shelf?.buildPotionEffect(this) ?? '';
+  }
+
+  String get fullPotionEffect {
+    if (!isPotion) return '';
+    return _shelf?.buildFullPotionEffect(this) ?? '';
   }
 
   @override
@@ -110,6 +121,7 @@ class Reactant {
           String? groupId,
           ColorDescription? colorDescription}) =>
       Reactant(
+        shelf: _shelf,
         regnum: regnum ?? this.regnum,
         nomen: nomen,
         name: name,
@@ -136,14 +148,16 @@ class Reactant {
 
 class Concoct implements Reactant {
   const Concoct({
+    required Shelf? shelf,
     required this.regnum,
     this.isSolid = true,
     this.quality,
     required this.potions,
-  });
+  }) : _shelf = shelf;
 
   factory Concoct._fromReactant(Reactant reactant) {
     return Concoct(
+      shelf: reactant._shelf,
       regnum: reactant.potion?.regnum ?? '',
       isSolid: reactant.isSolid,
       quality: reactant.quality,
@@ -151,6 +165,8 @@ class Concoct implements Reactant {
     );
   }
 
+  @override
+  final Shelf? _shelf;
   @override
   final String regnum;
   @override
@@ -208,7 +224,15 @@ class Concoct implements Reactant {
   bool get isPotion => true;
 
   @override
-  String get potionEffect => throw UnimplementedError();
+  String get potionEffect {
+    if (!isPotion) return '';
+    return _shelf?.buildPotionEffect(this) ?? '';
+  }
+
+  @override
+  String get fullPotionEffect {
+    return potions.map((potion) => _shelf?.buildFullPotionEffect(potion)).join('\n\n');
+  }
 
   @override
   String toString() {
@@ -234,15 +258,22 @@ class Concoct implements Reactant {
           String? groupId,
           ColorDescription? colorDescription}) =>
       Concoct(
+        shelf: _shelf,
         regnum: regnum ?? this.regnum,
         isSolid: solid ?? isSolid,
         quality: quality,
-        potions: [],
+        potions: potions,
       );
 
   Concoct merge(Reactant other) {
     if (!other.isPotion) return this;
-    return Concoct(regnum: regnum, potions: [...potions, ...other.concoct().potions]);
+    return Concoct(
+      shelf: _shelf,
+      regnum: regnum,
+      isSolid: isSolid,
+      quality: quality,
+      potions: [...potions, ...other.concoct().potions],
+    );
   }
 
   @override

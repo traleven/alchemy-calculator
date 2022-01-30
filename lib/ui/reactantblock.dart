@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dotted_border/dotted_border.dart';
 
-import '../model/alchemyoperations.dart';
 import 'colorbox.dart';
+import '../model/alchemyoperations.dart';
+import '../model/colordescription.dart';
 import '../model/reactant.dart';
 import '../model/workbench.dart';
-import '../model/shelf.dart';
 
 class ReactantBlock extends StatelessWidget {
   const ReactantBlock({
@@ -34,13 +34,13 @@ class ReactantBlock extends StatelessWidget {
                   const Spacer(),
                   _reactantOrNull(
                     block.base,
-                    'Drop base substance here',
+                    'Базовое вещество',
                     onAcceptDrop: (reactant) => block.base = reactant,
                   ),
                   const SizedBox(width: 20),
                   _reactantOrNull(
                     block.catalyst,
-                    'Drop additional substance here',
+                    'Дополнительное вещество',
                     solidBorder: false,
                     onAcceptDrop: (reactant) => block.catalyst = reactant,
                   ),
@@ -85,7 +85,7 @@ class ReactantBlock extends StatelessWidget {
   }) {
     return _droppable<AlchemyOperation>(
       operation,
-      'Drop operation here',
+      'Операция',
       builder: (item) => OperationItem(operation: item),
       solidBorder: solidBorder,
       radius: const Radius.circular(16.0),
@@ -129,29 +129,36 @@ class ReactantItem extends StatelessWidget {
       : nomen = reactant.displayNomen,
         name = reactant.displayName + (reactant.hasSolidState ? ' (${reactant.displaySolidState})' : ''),
         color = reactant.stage == 0 ? reactant.colorDescription : null,
+        tooltip = reactant.fullPotionEffect,
         super(key: key);
 
   final String nomen;
   final String name;
+  final String? tooltip;
   final ColorDescription? color;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        if (color != null) ColorBox(size: 25, color: color),
-        if (color != null) const SizedBox(width: 8),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(name),
-            Text(nomen,
-                style: Theme.of(context).textTheme.caption?.copyWith(
-                    fontFamily: defaultTextStyle.fontFamily, fontFamilyFallback: defaultTextStyle.fontFamilyFallback)),
-          ],
-        ),
-      ],
+    return Tooltip(
+      message: tooltip ?? '',
+      waitDuration: const Duration(seconds: 1),
+      child: Row(
+        children: [
+          if (color != null) ColorBox(size: 25, color: color),
+          if (color != null) const SizedBox(width: 8),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(name),
+              Text(nomen,
+                  style: Theme.of(context).textTheme.caption?.copyWith(
+                      fontFamily: defaultTextStyle.fontFamily,
+                      fontFamilyFallback: defaultTextStyle.fontFamilyFallback)),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

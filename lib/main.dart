@@ -14,9 +14,14 @@ void main() {
 }
 
 const TextStyle defaultTextStyle = TextStyle(
+  fontFamily: 'NotoSansSymbols',
+  fontFamilyFallback: ['NotoSansSymbols-Black', 'NotoSansSymbols2', 'NotoEmoji', 'NotoSans'],
+);
+
+const TextStyle defaultBlackTextStyle = TextStyle(
   color: Colors.black,
   fontFamily: 'NotoSansSymbols',
-  fontFamilyFallback: ['NotoSansSymbols-Black', 'NotoEmoji', 'NotoSans'],
+  fontFamilyFallback: ['NotoSansSymbols-Black', 'NotoSansSymbols2', 'NotoEmoji', 'NotoSans'],
 );
 
 class MyApp extends StatelessWidget {
@@ -36,9 +41,13 @@ class MyApp extends StatelessWidget {
           color: Colors.black,
           opacity: 1.0,
         ),
+        tooltipTheme: TooltipThemeData(
+          textStyle: defaultTextStyle.copyWith(color: Colors.white, height: 1.2),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        ),
       ),
       home: const Material(
-        textStyle: defaultTextStyle,
+        textStyle: defaultBlackTextStyle,
         child: PageComposition(),
       ),
     );

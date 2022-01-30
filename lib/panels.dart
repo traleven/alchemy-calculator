@@ -19,7 +19,7 @@ class WorkbenchPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: DefaultTextStyle(
-        style: defaultTextStyle,
+        style: defaultBlackTextStyle,
         child: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           restorationId: "workbench",
@@ -61,8 +61,9 @@ class LogPanel extends StatelessWidget {
       builder: (context, reaction, child) => Scaffold(
         body: ListView(
           primary: false,
+          padding: const EdgeInsets.all(4),
           children: [
-            for (final item in reaction.log) Row(children: [Flexible(child: Text(item, style: defaultTextStyle))])
+            for (final item in reaction.log) Row(children: [Flexible(child: Text(item, style: defaultBlackTextStyle))])
           ],
         ),
         floatingActionButton: IconButton(
@@ -302,7 +303,7 @@ Widget _makeDraggable(BuildContext context, Widget item) {
   return Material(
     type: MaterialType.card,
     clipBehavior: Clip.hardEdge,
-    textStyle: defaultTextStyle,
+    textStyle: defaultBlackTextStyle,
     elevation: 8.0,
     borderRadius: const BorderRadius.all(Radius.circular(4)),
     child: Padding(padding: const EdgeInsets.all(4), child: item),

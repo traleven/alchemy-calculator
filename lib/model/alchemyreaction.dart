@@ -51,7 +51,8 @@ class AlchemyReaction extends ChangeNotifier {
           final result = _concoctReaction(substance: substance, catalyst: catalyst, operation: operation);
           log += result.displayName;
           if (result.isPotion) {
-            //log += ' (${result.displayNomen})';
+            log += '\n';
+            log += result.fullPotionEffect.replaceAll('\n\n', '\t').replaceAll('\n', '; ').replaceAll('\t', '\n');
             _shelf.registerPotion(result);
           }
           log += '\n';
@@ -73,7 +74,8 @@ class AlchemyReaction extends ChangeNotifier {
             result = _transmute(substance: result, toPater: toPater);
             log += result.displayName;
             if (result.isPotion) {
-              //log += ' (${result.displayNomen})';
+              log += '\n';
+              log += result.fullPotionEffect.replaceAll('\n', '; ');
               _shelf.registerPotion(result);
             }
             log += '\n';
@@ -123,13 +125,13 @@ class AlchemyReaction extends ChangeNotifier {
       return const Reactant.shit();
     }
 
-    final concoct = substance.concoct();
+    final concoct = substance.concoct().withValues(solid: operation.resultState);
     if (!Shelf.sameRegnum([concoct.regnum, catalyst.potion!.regnum, operation.regnum])) return const Reactant.shit();
     if (!Shelf.checkSupport(regnum: catalyst.regnum, supports: concoct.potions.last.regnum)) {
       return const Reactant.shit();
     }
-    final result = substance.concoct().merge(catalyst);
-    if (result.potions.length >= 3) return const Reactant.shit();
+    final result = concoct.merge(catalyst);
+    if (result.potions.length > 3) return const Reactant.shit();
     final principles = result.potions.map((e) => e.potion!.principle).toSet();
     if (result.potions.length != principles.length) return const Reactant.shit();
     final aspects = result.potions.map((e) => '${e.colorDescription?.symbol}${e.groupId}');
@@ -237,8 +239,7 @@ class AlchemyReaction extends ChangeNotifier {
                 ? substance.withValues(
                     stage: 0,
                     elixir: toPater,
-                    principle: _shelf.getPrinciple(
-                        potion: substance.potion!.regnum, substance: substance.regnum, elixir: toPater),
+                    principle: _shelf.findPotionPrinciple(potion: substance, elixir: toPater)?.nomen,
                   )
                 : toPater
                     ? substance.getPater(_shelf)

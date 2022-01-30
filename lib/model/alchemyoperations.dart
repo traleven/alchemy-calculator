@@ -46,8 +46,9 @@ class AlchemyOperation implements Comparable {
   int get fullStage => stage ~/ 2;
 
   String get displayName => name;
-  String get displaySolidState =>
-      '${substanceState?.solidState() ?? '_'}+${catalystState?.solidState() ?? '_'}=${resultState?.solidState() ?? '_'}';
+  String get displaySolidState => '${substanceState?.solidState() ?? '\uFFFD'}+'
+      '${catalystState?.solidState() ?? '\uFFFD'}='
+      '${stage < 2 ? resultState?.solidState() ?? '_' : '\uFFFD'}';
   bool get requireSolidState => substanceState != null || catalystState != null || resultState != null;
 
   String? get displayCondition => condition;

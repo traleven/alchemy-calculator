@@ -1,9 +1,13 @@
+import 'dart:math';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 
 import 'alchemyoperations.dart';
+import 'aspect.dart';
+import 'colordescription.dart';
 import 'reactant.dart';
 import 'icons.dart';
 
@@ -21,6 +25,8 @@ class Shelf extends ChangeNotifier {
   final Set<Color> _reactantColorFilter = {};
   bool _reactantPotionFilter = false;
 
+  final Map<String, Map<Color, List<Aspect>>> _aspects = {};
+
   static Iterable<String> regna = ['mineral', 'animal', 'herbal'];
   static const Map<String, String> _regnumSupport = {'mineral': 'herbal', 'animal': 'mineral', 'herbal': 'animal'};
   static const Map<String, String> _regnumNames = {
@@ -30,22 +36,10 @@ class Shelf extends ChangeNotifier {
     'potion': 'Зелья',
   };
 
-  static const Map<String, Map<String, Map<bool, String>>> _principles = {
-    'mineral': {
-      'mineral': {true: 'Fixatio', false: 'Solutio'},
-      'animal': {true: 'Coagulatio', false: 'Conjunctio'},
-      'herbal': {true: 'Separatio', false: 'Ceratio'}
-    },
-    'animal': {
-      'mineral': {true: 'Separatio', false: 'Ceratio'},
-      'animal': {true: 'Fixatio', false: 'Solutio'},
-      'herbal': {true: 'Coagulatio', false: 'Conjunctio'}
-    },
-    'herbal': {
-      'mineral': {true: 'Coagulatio', false: 'Conjunctio'},
-      'animal': {true: 'Separatio', false: 'Ceratio'},
-      'herbal': {true: 'Fixatio', false: 'Solutio'}
-    }
+  static final Map<int, Map<bool, Principle>> _principles = {
+    // -1: {true: 'Separatio', false: 'Ceratio'},
+    // 0: {true: 'Fixatio', false: 'Solutio'},
+    // 1: {true: 'Coagulatio', false: 'Conjunctio'},
   };
 
   static final Map<Color, ColorDescription> _colorSymbols = {
@@ -101,7 +95,7 @@ class Shelf extends ChangeNotifier {
     final json = await bundle.loadString('recipies/$fileName.json');
     Map<String, dynamic> data = jsonDecode(json);
     data["reactants"].forEach((value) {
-      final reactant = Reactant.fromJson(fileName, value);
+      final reactant = Reactant.fromJson(this, fileName, value);
       _data[reactant.nomen] = reactant.withValues(
         groupId: groupIds.firstWhereOrNull((id) => reactant.group.contains(id)),
         colorDescription: _colorSymbols[reactant.color],
@@ -118,6 +112,27 @@ class Shelf extends ChangeNotifier {
       data["catalysts"].forEach((value) {
         final chain = CatalystChain.fromJson(value);
         _catalysts.add(chain);
+      });
+    }
+
+    if (_principles.isEmpty) {
+      final json = await bundle.loadString('recipies/potions.json');
+      data = jsonDecode(json);
+      data["principles"].forEach((value) {
+        final principle = Principle.fromJson(value);
+        _principles[principle.regnum] ??= {};
+        _principles[principle.regnum]![principle.toPater] = principle;
+      });
+    }
+
+    if (_aspects.isEmpty) {
+      final json = await bundle.loadString('recipies/potions.json');
+      data = jsonDecode(json);
+      data["aspects"].forEach((value) {
+        final aspect = Aspect.fromJson(value);
+        _aspects[aspect.regnum] ??= {};
+        _aspects[aspect.regnum]![aspect.color] ??= [];
+        _aspects[aspect.regnum]![aspect.color]!.add(aspect);
       });
     }
 
@@ -226,46 +241,69 @@ class Shelf extends ChangeNotifier {
     return regnum == null || list.every((element) => element.isEmpty || element == regnum);
   }
 
-  static String buildPotionEffect(Reactant reactant) {
+  String buildPotionEffect(Reactant reactant) {
     if (!reactant.isPotion) return 'Гажа';
-    String? principle = _principles[reactant.potion!.regnum]?[reactant.regnum]?[reactant.potion!.isElixir];
-    return '${reactant.potion!.regnum.regnumSymbol}${reactant.potion!.displayPrincipleDirection} $principle ${reactant.colorDescription?.symbol}${reactant.groupId}';
+    Principle? principle = findPrinciple(
+        potionRegnum: reactant.potion!.regnum, substanceRegnum: reactant.regnum, elixir: reactant.potion!.isElixir!);
+    return '${reactant.potion!.regnum.regnumSymbol}${reactant.potion!.displayPrincipleDirection} ${principle?.nomen} ${reactant.colorDescription?.symbol}${reactant.groupId}';
   }
 
-  String? getPrinciple({required String potion, required String substance, required bool elixir}) =>
-      _principles[potion]?[substance]?[elixir];
+  String buildFullPotionEffect(Reactant reactant) {
+    if (!reactant.isPotion) return 'Гажа';
+    Principle? principle = findPrinciple(
+        potionRegnum: reactant.potion!.regnum, substanceRegnum: reactant.regnum, elixir: reactant.potion!.isElixir!);
+    Aspect? aspect = findAspect(
+        regnum: reactant.potion!.regnum, color: reactant.color ?? Colors.transparent, groupId: reactant.groupId);
+    return 'Цель: ${reactant.potion!.regnum.regnumName}\n'
+        'База: ${reactant.regnum.regnumName}, ${reactant.name}, ${reactant.nomen}\n'
+        'Принцип: ${reactant.potion!.displayPrincipleDirection} ${principle?.nomen} (${principle?.description[reactant.potion!.regnum]})\n'
+        'Аспект: ${reactant.colorDescription?.symbol}${reactant.groupId} (${aspect?.name})';
+  }
+
+  Principle? findPrinciple({required String potionRegnum, required String substanceRegnum, required bool elixir}) {
+    final relative = substanceRegnum.regnumRelativeTo(potionRegnum) ?? -2;
+    return _principles[relative]?[elixir];
+  }
+
+  Principle? findPotionPrinciple({required Reactant potion, bool? elixir}) {
+    if (potion.potion == null) return null;
+    if (null == elixir && null == potion.potion?.isElixir) return null;
+    return findPrinciple(
+      potionRegnum: potion.potion!.regnum,
+      substanceRegnum: potion.regnum,
+      elixir: elixir ?? potion.potion!.isElixir!,
+    );
+  }
+
+  Aspect? findAspect({required String regnum, required Color color, required String groupId}) =>
+      _aspects[regnum]?[color]?.firstWhereOrNull((aspect) => aspect.sign.contains(groupId));
 }
 
-class ColorDescription {
-  const ColorDescription(
-      {required this.color,
-      required this.symbol,
-      required this.icon,
-      required this.name,
-      required this.description,
-      required this.paterQuality,
-      required this.materQuality});
+class Principle {
+  const Principle({
+    required this.regnum,
+    required this.nomen,
+    required this.name,
+    required this.description,
+    required this.toPater,
+  });
 
-  ColorDescription.fromJson(Color color, dynamic map) : this.fromMap(color, map);
+  Principle.fromJson(dynamic map) : this.fromMap(map);
 
-  ColorDescription.fromMap(Color color, Map<String, dynamic> map)
+  Principle.fromMap(Map<String, dynamic> map)
       : this(
-          color: color,
-          symbol: map["symbol"],
-          icon: AlchemyIcons.named(map["icon"]),
-          name: map["name"],
-          description: map["description"].cast<String>().toList(growable: false),
-          paterQuality: map["paterQuality"],
-          materQuality: map["materQuality"],
+          regnum: map['regnum'],
+          nomen: map['nomen'],
+          name: map['name'],
+          description: Map.fromIterables(Shelf.regna, map['description'].cast<String>()),
+          toPater: map['toPater'],
         );
 
-  final Color color;
-  final String symbol;
-  final AssetImage? icon;
+  final int regnum;
+  final String nomen;
   final String name;
-  final List<String> description;
-  final int paterQuality;
-  final int materQuality;
+  final bool toPater;
+  final Map<String, String> description;
 }
 
 extension StringConversions on String {
@@ -275,5 +313,12 @@ extension StringConversions on String {
 
   AssetImage? get regnumIcon {
     return AlchemyIcons.named(this == 'potion' ? 'icon_$this' : 'icon_realm_$this');
+  }
+
+  int? regnumRelativeTo(String referenceRegnum) {
+    if (Shelf.checkSupport(regnum: this, supports: referenceRegnum)) return 1;
+    if (Shelf.checkSupport(regnum: referenceRegnum, supports: this)) return -1;
+    if (Shelf.sameRegnum([this, referenceRegnum])) return 0;
+    return null;
   }
 }
