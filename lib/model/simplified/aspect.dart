@@ -9,7 +9,7 @@ class SimpleAspect {
 
   SimpleAspect.fromMap(Map<String, dynamic> map)
       : this(
-          element: map['regnum'],
+          element: map['element'],
           color: map['color'],
           name: map['name'],
         );

@@ -6,19 +6,19 @@ import 'alchemyoperations.dart';
 import 'reactant.dart';
 import 'shelf.dart';
 
-class Workbench extends ChangeNotifier {
-  factory Workbench({required SimpleShelf shelf}) {
+class SimpleWorkbench extends ChangeNotifier {
+  factory SimpleWorkbench({required SimpleShelf shelf}) {
     if (!_cache.containsKey(shelf.title)) {
-      _cache[shelf.title] = Workbench._create(shelf: shelf);
+      _cache[shelf.title] = SimpleWorkbench._create(shelf: shelf);
     }
     return _cache[shelf.title]!;
   }
 
-  Workbench._create({required SimpleShelf shelf});
+  SimpleWorkbench._create({required SimpleShelf shelf});
 
   late final List<Block> _data = [_createBlock()];
 
-  static final Map<String, Workbench> _cache = {};
+  static final Map<String, SimpleWorkbench> _cache = {};
 
   Block _createBlock() {
     final block = Block();

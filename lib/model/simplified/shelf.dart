@@ -26,20 +26,13 @@ class SimpleShelf extends ChangeNotifier {
 
   static final Map<String, Map<bool, SimplePrinciple>> _principles = {};
 
-  static final Map<Color, ColorDescription> _colorSymbols = {
-    Colors.transparent: const ColorDescription(
-      color: Colors.transparent,
-      symbol: '',
-      icon: null,
-      name: '',
-      description: [],
-      paterQuality: -1,
-      materQuality: -1,
-    )
-  };
+  static final Map<Color, ColorDescription> _colorSymbols = {};
   static final Map<String, List<String>> _signSymbols = {};
   static final Map<String, SimpleShelf> _cache = {};
-  static const Map<String, String> _regnumSupport = {'Соль': 'Меркурий', 'Меркурий': 'Сульфур', 'Сульфур': 'Соль'};
+  static const Map<String, String> _natureSupport = {'Соль': 'Меркурий', 'Меркурий': 'Сульфур', 'Сульфур': 'Соль'};
+
+  static const List<String> natures = ['Сульфур', 'Меркурий', 'Соль'];
+  static const List<String> elements = ['Огонь', 'Воздух', 'Вода', 'Земля'];
 
   static Future<SimpleShelf> loadAsync(AssetBundle bundle, String fileName) async {
     if (!_cache.containsKey(fileName)) {
@@ -61,7 +54,7 @@ class SimpleShelf extends ChangeNotifier {
 
   Future<void> asyncInit(AssetBundle bundle, String fileName) async {
     await AlchemyIcons.loadAsync(bundle);
-    if (_colorSymbols.length == 1) {
+    if (_colorSymbols.length <= 1) {
       final nomenclatureJson = await bundle.loadString('recipies/nomenclature.json');
       Map<String, dynamic> data = jsonDecode(nomenclatureJson);
       data['colors'].forEach((value) {
@@ -80,7 +73,7 @@ class SimpleShelf extends ChangeNotifier {
     data["reactants"].forEach((value) {
       final reactant = SimpleReactant.fromJson(this, value);
       _data[reactant.name] = reactant.withValues(
-        colorDescription: _colorSymbols[reactant.color],
+        colorDescription: _colorSymbols[reactant.color?.namedColor],
       );
     });
 
@@ -179,7 +172,7 @@ class SimpleShelf extends ChangeNotifier {
     return _data.values.where((e) =>
         (_reactantPotionFilter == e.isPotion) &&
         (_reactantElementFilter.isEmpty || e.element.isEmpty || _reactantElementFilter.contains(e.element)) &&
-        (_reactantColorFilter.isEmpty || _reactantColorFilter.contains(e.color) || e.color == null));
+        (_reactantColorFilter.isEmpty || _reactantColorFilter.contains(e.colorDescription?.name) || e.color == null));
   }
 
   void registerPotion(SimpleReactant reactant) {
@@ -190,7 +183,7 @@ class SimpleShelf extends ChangeNotifier {
   }
 
   static bool checkSupport({required String? nature, required String? supports}) {
-    return _regnumSupport[nature] == supports;
+    return _natureSupport[nature] == supports;
   }
 
   static bool sameRegnum(List<String> list) {
@@ -202,7 +195,8 @@ class SimpleShelf extends ChangeNotifier {
     if (!reactant.isPotion) return 'Гажа';
     SimplePrinciple? principle =
         findPrinciple(potionNature: reactant.potion!.nature, elixir: reactant.potion!.isElixir!);
-    return '${reactant.potion!.nature.natureSymbol}${reactant.potion!.displayPrincipleDirection} ${principle?.name} ${reactant.colorDescription?.symbol}${reactant.element.elementSymbol}';
+    SimpleAspect? aspect = findAspect(element: reactant.element, color: reactant.color);
+    return '${principle?.name}: ${aspect?.name}';
   }
 
   String buildFullPotionEffect(SimpleReactant reactant) {
@@ -210,8 +204,9 @@ class SimpleShelf extends ChangeNotifier {
     SimplePrinciple? principle =
         findPrinciple(potionNature: reactant.potion!.nature, elixir: reactant.potion!.isElixir!);
     SimpleAspect? aspect = findAspect(element: reactant.element, color: reactant.color);
-    return 'База: ${reactant.element}, ${reactant.name}, ${reactant.name}\n'
-        'Принцип: ${reactant.potion!.displayPrincipleDirection} ${principle?.name}\n'
+    return 'База: ${reactant.element}, ${reactant.name}\n'
+        'Природа: ${reactant.nature}\n'
+        'Принцип: ${reactant.nature?.natureSymbol}${reactant.potion!.displayPrincipleDirection} ${principle?.name}\n'
         'Аспект: ${reactant.colorDescription?.symbol}${reactant.element.elementSymbol} (${aspect?.name})';
   }
 
@@ -257,10 +252,43 @@ extension StringConversions on String {
     return AlchemyIcons.named(this == 'potion' ? 'icon_$this' : 'icon_realm_$this');
   }
 
+  AssetImage? get natureIcon {
+    switch (this) {
+      case 'Сульфур':
+        return AlchemyIcons.named('icon_matter_sulphur');
+      case 'Меркурий':
+        return AlchemyIcons.named('icon_matter_mercury');
+      case 'Соль':
+        return AlchemyIcons.named('icon_matter_salt');
+    }
+    return null;
+  }
+
+  AssetImage? get elementIcon {
+    switch (this) {
+      case 'Огонь':
+        return AlchemyIcons.named('icon_element_fire');
+      case 'Воздух':
+        return AlchemyIcons.named('icon_element_air');
+      case 'Вода':
+        return AlchemyIcons.named('icon_element_water');
+      case 'Земля':
+        return AlchemyIcons.named('icon_element_earth');
+    }
+    return null;
+  }
+
   int? regnumRelativeTo(String referenceNature) {
     if (SimpleShelf.checkSupport(nature: this, supports: referenceNature)) return 1;
     if (SimpleShelf.checkSupport(nature: referenceNature, supports: this)) return -1;
     if (SimpleShelf.sameRegnum([this, referenceNature])) return 0;
     return null;
+  }
+
+  Color get namedColor {
+    return SimpleShelf._colorSymbols.values.firstWhereOrNull((cd) {
+          return cd.name == this || cd.description.contains(this);
+        })?.color ??
+        Colors.transparent;
   }
 }

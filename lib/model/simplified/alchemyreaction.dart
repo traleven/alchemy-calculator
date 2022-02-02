@@ -26,7 +26,7 @@ class AlchemyReaction extends ChangeNotifier {
 
   Iterable<String> get log => _log;
 
-  void call(Workbench workbench) {
+  void call(SimpleWorkbench workbench) {
     var chain = workbench.blocks;
     if (chain.isEmpty || !chain.first.hasOperation) return;
     var log = '';
@@ -44,7 +44,7 @@ class AlchemyReaction extends ChangeNotifier {
         // Concoct brewing
         if (substance.isPotion) {
           final result = _concoctReaction(substance: substance, catalyst: catalyst, operation: operation);
-          log += result.displayName;
+          log += result.displayName.replaceAll('\n', '; ');
           if (result.isPotion) {
             log += '\n';
             log += result.fullPotionEffect.replaceAll('\n\n', '\t').replaceAll('\n', '; ').replaceAll('\t', '\n');
@@ -136,10 +136,6 @@ class AlchemyReaction extends ChangeNotifier {
     final step = evaluateStep(substance: substance, catalyst: catalyst).abs();
     if (0 == step) return const SimpleReactant.shit();
 
-    if (SimpleShelf.checkSupport(nature: catalyst.nature, supports: substance.nature)) {
-      return const SimpleReactant.shit();
-    }
-
     if (substance.stage == 0 && substance.potion == null) {
       substance = substance.withValues(potion: SimplePotion(nature: operation.nature));
     }
@@ -150,7 +146,6 @@ class AlchemyReaction extends ChangeNotifier {
       // Potion
       return substance.withValues(
         stage: substance.stage + step,
-        element: ((substance.stage + step) % 2 == 0) ? catalyst.element : null,
       );
     }
   }
@@ -177,7 +172,7 @@ class AlchemyReaction extends ChangeNotifier {
           );
   }
 
-  UnmodifiableListView<Block> _progress(Workbench workbench, int i, SimpleReactant? substance) {
+  UnmodifiableListView<Block> _progress(SimpleWorkbench workbench, int i, SimpleReactant? substance) {
     while (workbench.blocks.length <= i) {
       workbench.pushBlock();
     }

@@ -54,8 +54,8 @@ class SimpleReactant {
   String get displayNomen => stage != 0
       ? 'Микстура'
       : potion == null
-          ? name
-          : '${potion!.nature.natureSymbol}${potion!.displayPrincipleDirection}${element.elementSymbol}$_namePrefix $name';
+          ? ''
+          : '${potion!.nature.natureSymbol}${potion!.displayPrincipleDirection}$_namePrefix';
 
   String get displayName => stage != 0
       ? 'Нестабильное соединение'
@@ -139,8 +139,8 @@ class SimpleConcoct implements SimpleReactant {
   String get nature => '';
 
   @override
-  String get name =>
-      _namePrefix + ' ' + potions.map((e) => e.displayName.substring(e.displayName.characters.first.length)).join('; ');
+  String get name => potions.map((e) => e.displayName).join('\n');
+  String get nomen => _namePrefix + ' ' + potions.map((e) => e.displayNomen).join('; ');
 
   @override
   final bool isSolid;
@@ -161,7 +161,7 @@ class SimpleConcoct implements SimpleReactant {
   int get fullStage => stage ~/ 2;
 
   @override
-  String get displayNomen => potions.length == 1 ? potions[0].displayNomen : name;
+  String get displayNomen => potions.length == 1 ? potions[0].displayNomen : nomen;
 
   @override
   String get displayName => potions.length == 1 ? potions[0].displayName : name;

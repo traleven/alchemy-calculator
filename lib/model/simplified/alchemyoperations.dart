@@ -1,5 +1,7 @@
 import 'package:collection/collection.dart';
 
+import 'reactant.dart';
+
 class SimpleOperation implements Comparable {
   const SimpleOperation({
     required this.nature,
@@ -26,7 +28,7 @@ class SimpleOperation implements Comparable {
   String get id => '$nature $name';
   int get fullStage => stage ~/ 2;
 
-  String get displayName => name;
+  String get displayName => '${nature.natureSymbol} $name';
 
   @override
   int compareTo(other) {
@@ -63,7 +65,7 @@ class CatalystChain {
 
   CatalystChain.fromMap(Map<String, dynamic> map)
       : this(
-          initial: map['initial'],
+          initial: SimpleCatalyst(map['initial']),
           toPater: map['direction'] == 'pater',
           stages: UnmodifiableListView(
               (map['stages'] as List<dynamic>).map((e) => SimpleCatalyst(e)).toList(growable: false)),
