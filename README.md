@@ -10,4 +10,4 @@ TBD: put link to alchemy table templates here
 
 The Alchemy Calculator itself is under [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-It uses Noto fonts under [![License: Open Font-1.1](https://img.shields.io/badge/License-OFL_1.1-lightgreen.svg)](https://opensource.org/licenses/OFL-1.1)
+It uses [Noto fonts](https://fonts.google.com/noto) under [![License: Open Font-1.1](https://img.shields.io/badge/License-OFL_1.1-lightgreen.svg)](https://opensource.org/licenses/OFL-1.1)
