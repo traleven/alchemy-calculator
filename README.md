@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="https://github.com/traleven/alchemy-calculator/raw/master/icons/icon_calculator.png">
+</p>
+
 # Alchemy Calculator
 
 Alchemy Calculator provides interactive insight into the playable alchemy model developed by [traleven](https://github.com/traleven/) and **satharis**.
