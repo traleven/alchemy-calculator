@@ -1,6 +1,6 @@
 # Alchemy Calculator
 
-Alchemy Calculator provides interactive insight into the playable alchemy model developed by traleven and satharis.
+Alchemy Calculator provides interactive insight into the playable alchemy model developed by [traleven](https://github.com/traleven/) and **satharis**.
 
 ## Underlying model
 
