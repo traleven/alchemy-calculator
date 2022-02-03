@@ -1,16 +1,13 @@
-# alchemy_calculator
+# Alchemy Calculator
 
-A new Flutter project.
+Alchemy Calculator provides interactive insight into the playable alchemy model developed by traleven and satharis.
 
-## Getting Started
+## Underlying model
 
-This project is a starting point for a Flutter application.
+TBD: put link to alchemy table templates here
 
-A few resources to get you started if this is your first Flutter project:
+## License
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+The Alchemy Calculator itself is under [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+It uses Noto fonts under [![License: Open Font-1.1](https://img.shields.io/badge/License-OFL_1.1-lightgreen.svg)](https://opensource.org/licenses/OFL-1.1)
