@@ -1,0 +1,295 @@
+{
+    "reactants": [
+        { "name": "эссенция Красного Огня", "color": "Красный", "element": "Огонь", "solid": true },
+        { "name": "эссенция Красной Воды", "color": "Красный", "element": "Вода", "solid": false },
+        { "name": "эссенция Красного Воздуха", "color": "Красный", "element": "Воздух", "solid": false },
+        { "name": "эссенция Красной Земли", "color": "Красный", "element": "Земля", "solid": true },
+        { "name": "эссенция Белого Огня", "color": "Белый", "element": "Огонь", "solid": true },
+        { "name": "эссенция Белой Воды", "color": "Белый", "element": "Вода", "solid": false },
+        { "name": "эссенция Белого Воздуха", "color": "Белый", "element": "Воздух", "solid": false },
+        { "name": "эссенция Белой Земли", "color": "Белый", "element": "Земля", "solid": true },	
+        { "name": "эссенция Зеленого Огня", "color": "Зеленый", "element": "Огонь", "solid": true },
+        { "name": "эссенция Зеленой Воды", "color": "Зеленый", "element": "Вода", "solid": false },
+        { "name": "эссенция Зеленого Воздуха", "color": "Зеленый", "element": "Воздух", "solid": false },
+        { "name": "эссенция Зеленой Земли", "color": "Зеленый", "element": "Земля", "solid": true },	
+        { "name": "эссенция Синего Огня", "color": "Синий", "element": "Огонь", "solid": true },
+        { "name": "эссенция Синей Воды", "color": "Синий", "element": "Вода", "solid": false },
+        { "name": "эссенция Синего Воздуха", "color": "Синий", "element": "Воздух", "solid": false },
+        { "name": "эссенция Синей Земли", "color": "Синий", "element": "Земля", "solid": true },	
+        { "name": "эссенция Багрового Огня", "color": "Багровый", "element": "Огонь", "solid": true },
+        { "name": "эссенция Багровой Воды", "color": "Багровый", "element": "Вода", "solid": false },
+        { "name": "эссенция Багрового Воздуха", "color": "Багровый", "element": "Воздух", "solid": false },
+        { "name": "эссенция Багровой Земли", "color": "Багровый", "element": "Земля", "solid": true },	
+        { "name": "эссенция Желтого Огня", "color": "Желтый", "element": "Огонь", "solid": true },
+        { "name": "эссенция Желтой Воды", "color": "Желтый", "element": "Вода", "solid": false },
+        { "name": "эссенция Желтого Воздуха", "color": "Желтый", "element": "Воздух", "solid": false },
+        { "name": "эссенция Желтой Земли", "color": "Желтый", "element": "Земля", "solid": true },	
+        { "name": "эссенция Светлого Огня", "color": "Светлый", "element": "Огонь", "solid": true },
+        { "name": "эссенция Светлой Воды", "color": "Светлый", "element": "Вода", "solid": false },
+        { "name": "эссенция Светлого Воздуха", "color": "Светлый", "element": "Воздух", "solid": false },
+        { "name": "эссенция Светлой Земли", "color": "Светлый", "element": "Земля", "solid": true },	
+        { "name": "эссенция Темного Огня", "color": "Темный", "element": "Огонь", "solid": true },
+        { "name": "эссенция Темной Воды", "color": "Темный", "element": "Вода", "solid": false },
+        { "name": "эссенция Темного Воздуха", "color": "Темный", "element": "Воздух", "solid": false },
+        { "name": "эссенция Темной Земли", "color": "Темный", "element": "Земля", "solid": true },	
+        { "name": "эссенция Черного Огня", "color": "Черный", "element": "Огонь", "solid": true },
+        { "name": "эссенция Черной Воды", "color": "Черный", "element": "Вода", "solid": false },
+        { "name": "эссенция Черного Воздуха", "color": "Черный", "element": "Воздух", "solid": false },
+        { "name": "эссенция Черной Земли", "color": "Черный", "element": "Земля", "solid": true }
+    ],
+    "operations": [
+        {
+            "nature": "Сульфур",
+            "name": "Калефакция",
+            "description": "Жидкое слегка нагревается (не кипит), туда добавляется сухое и помешивается.",
+            "stage": 0
+        },
+        {
+            "nature": "Меркурий",
+            "name": "Диссолюция",
+            "description": "Сухое заливается жидким и взбалтывается.",
+            "stage": 0
+        },
+        {
+            "nature": "Соль",
+            "name": "Путрефакция",
+            "description": "Сухое заливается жидким. Затем запечатывается и закапывается в землю/песок на 10 минут.",
+            "stage": 0
+        },
+        {
+            "nature": "Сульфур",
+            "name": "Пурификация",
+            "description": "На слабом огне в базу понемногу добавляется катализатор, остужается. Целевой слой -- верхний.",
+            "stage": 1
+        },
+        {
+            "nature": "Меркурий",
+            "name": "Фильтрация",
+            "description": "В базу понемногу добавляется катализатор, потом фильтруется через бумагу.",
+            "stage": 1
+        },
+        {
+            "nature": "Соль",
+            "name": "Декантация",
+            "description": "Понемногу добавляется катализатор и оставляется на отстаивание на 10 мин. Целевой слой -- нижний.",
+            "stage": 1
+        },
+        {
+            "nature": "Сульфур",
+            "name": "Конкокция",
+            "description": "Добавляется катализатор, взбалтывается, доводится до кипения и сразу остужается.",
+            "stage": 2
+        },
+        {
+            "nature": "Меркурий",
+            "name": "Конъюнкция",
+            "description": "Нагревается на медленном огне, понемногу добавляется катализатор.",
+            "stage": 2
+        },
+        {
+            "nature": "Соль",
+            "name": "Ферментация",
+            "description": "Добавляется катализатор, колба запечатывается и кладется в темноту на 15 минут.",
+            "stage": 2
+        }
+    ],
+    "catalysts": [
+        {
+            "initial": "Огонь", "direction": "pater",
+            "stages": [ "Воздух", "Вода", "Воздух" ]
+        },
+        {
+            "initial": "Огонь", "direction": "mater",
+            "stages": [ "Воздух", "Земля", "Воздух" ]
+        },
+        {
+            "initial": "Вода", "direction": "pater",
+            "stages": [ "Земля", "Воздух", "Земля" ]
+        },
+        {
+            "initial": "Вода", "direction": "mater",
+            "stages": [ "Земля", "Огонь", "Земля" ]
+        },
+        {
+            "initial": "Воздух", "direction": "pater",
+            "stages": [ "Огонь", "Земля", "Огонь" ]
+        },
+        {
+            "initial": "Воздух", "direction": "mater",
+            "stages": [ "Огонь", "Вода", "Огонь" ]
+        },
+        {
+            "initial": "Земля", "direction": "pater",
+            "stages": [ "Вода", "Огонь", "Вода" ]
+        },
+        {
+            "initial": "Земля", "direction": "mater",
+            "stages": [ "Вода", "Воздух", "Вода" ]
+        }
+    ],
+    "principles": [
+        { "nature": "Соль", "name": "Уничтожение", "toPater": true },
+        { "nature": "Соль", "name": "Ослабление", "toPater": false },
+        { "nature": "Меркурий", "name": "Защита", "toPater": true },
+        { "nature": "Меркурий", "name": "Очищение", "toPater": false },
+        { "nature": "Сульфур", "name": "Усиление", "toPater": true },
+        { "nature": "Сульфур", "name": "Добавление", "toPater": false }
+    ],
+    "aspects": [
+        { "element": "Огонь", "color": "Красный", "name": "огненное дыхание" },
+        { "element": "Воздух", "color": "Красный", "name": "прозрачность (невидимость)" },
+        { "element": "Вода", "color": "Красный", "name": "связь души и тела" },
+        { "element": "Земля", "color": "Красный", "name": "лечение ран, ушибов и т.д." },
+        { "element": "Огонь", "color": "Белый", "name": "регенерация" },
+        { "element": "Воздух", "color": "Белый", "name": "безумие, бред" },
+        { "element": "Вода", "color": "Белый", "name": "сон, анабиоз" },
+        { "element": "Земля", "color": "Белый", "name": "кости, зубы" },
+        { "element": "Огонь", "color": "Зеленый", "name": "эйфория" },
+        { "element": "Воздух", "color": "Зеленый", "name": "зрение" },
+        { "element": "Вода", "color": "Зеленый", "name": "любовь, привязанность" },
+        { "element": "Земля", "color": "Зеленый", "name": "кожа, покровы" },
+        { "element": "Огонь", "color": "Синий", "name": "insight, озарение, транс" },
+        { "element": "Воздух", "color": "Синий", "name": "мана (магическая энергия)" },
+        { "element": "Вода", "color": "Синий", "name": "метаболизм" },
+        { "element": "Земля", "color": "Синий", "name": "иммунитет" },
+        { "element": "Огонь", "color": "Багровый", "name": "ярость" },
+        { "element": "Воздух", "color": "Багровый", "name": "кровь" },
+        { "element": "Вода", "color": "Багровый", "name": "физ. сила" },
+        { "element": "Земля", "color": "Багровый", "name": "выносливость" },
+        { "element": "Огонь", "color": "Желтый", "name": "удача, везение" },
+        { "element": "Воздух", "color": "Желтый", "name": "мышление, сознание" },
+        { "element": "Вода", "color": "Желтый", "name": "ловкость" },
+        { "element": "Земля", "color": "Желтый", "name": "слух" },
+        { "element": "Огонь", "color": "Светлый", "name": "спокойствие, отстраненность" },
+        { "element": "Воздух", "color": "Светлый", "name": "телепатия" },
+        { "element": "Вода", "color": "Светлый", "name": "подводное дыхание" },
+        { "element": "Земля", "color": "Светлый", "name": "память" },
+        { "element": "Огонь", "color": "Темный", "name": "воля, решимость" },
+        { "element": "Воздух", "color": "Темный", "name": "хитрость, обман, ложь" },
+        { "element": "Вода", "color": "Темный", "name": "похоть, либидо, эрос" },
+        { "element": "Земля", "color": "Темный", "name": "подавленность, уныние, печаль" },
+        { "element": "Огонь", "color": "Черный", "name": "устойчивость к магии" },
+        { "element": "Воздух", "color": "Черный", "name": "страх" },
+        { "element": "Вода", "color": "Черный", "name": "боль" },
+        { "element": "Земля", "color": "Черный", "name": "смерть" }
+    ],
+    "colors": [
+        {
+            "color": "#f4cccc",
+            "symbol": "☉",
+            "icon": "icon_sun",
+            "name": "Солнце",
+            "description": [
+                "Красный",
+                "Вечный",
+                "Золотой"
+            ],
+            "paterQuality": 0,
+            "materQuality": 0
+        },
+        {
+            "color": "#ffffff",
+            "symbol": "☽",
+            "icon": "icon_moon",
+            "name": "Луна",
+            "description": [
+                "Белый",
+                "Бледный",
+                "Серебряный"
+            ],
+            "paterQuality": 1,
+            "materQuality": 0
+        },
+        {
+            "color": "#cfe2f3",
+            "symbol": "♃",
+            "icon": "icon_jupiter",
+            "name": "Юпитер",
+            "description": [
+                "Синий",
+                "Благой",
+                "Оловянный"
+            ],
+            "paterQuality": 2,
+            "materQuality": 0
+        },
+        {
+            "color": "#d9ead3",
+            "symbol": "♀",
+            "icon": "icon_venus",
+            "name": "Венера",
+            "description": [
+                "Зеленый",
+                "Утренний",
+                "Медный"
+            ],
+            "paterQuality": 0,
+            "materQuality": 1
+        },
+        {
+            "color": "#e6b8af",
+            "symbol": "♂",
+            "icon": "icon_mars",
+            "name": "Марс",
+            "description": [
+                "Багровый",
+                "Кровавый",
+                "Железный"
+            ],
+            "paterQuality": 1,
+            "materQuality": 1
+        },
+        {
+            "color": "#fce5cd",
+            "symbol": "⚷",
+            "icon": "icon_chiron",
+            "name": "Хирон",
+            "description": [
+                "Светлый",
+                "Надежный",
+                "Латунный"
+            ],
+            "paterQuality": 2,
+            "materQuality": 1
+        },
+        {
+            "color": "#fff2cc",
+            "symbol": "\u263F",
+            "icon": "icon_matter_mercury",
+            "name": "Гермаон",
+            "description": [
+                "Желтый",
+                "Вещий",
+                "Киноварный"
+            ],
+            "paterQuality": 0,
+            "materQuality": 2
+        },
+        {
+            "color": "#d9d2e9",
+            "symbol": "⚸",
+            "icon": "icon_lilith",
+            "name": "Лилит",
+            "description": [
+                "Темный",
+                "Ночной",
+                "Висмутовый"
+            ],
+            "paterQuality": 1,
+            "materQuality": 2
+        },
+        {
+            "color": "#b7b7b7",
+            "symbol": "♄",
+            "icon": "icon_saturn",
+            "name": "Сатурн",
+            "description": [
+                "Черный",
+                "Холодный",
+                "Свинцовый"
+            ],
+            "paterQuality": 2,
+            "materQuality": 2
+        }
+    ]
+}

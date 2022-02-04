@@ -17,37 +17,27 @@
 
 import 'package:flutter/material.dart';
 
-import 'colordescription.dart';
+import 'package:alchemy_calculator/model/colordescription.dart';
+
 import 'shelf.dart';
 
-class Reactant {
-  Reactant.fromJson(Shelf shelf, String regnum, dynamic map) : this.fromMap(shelf, regnum, map);
+class SimpleReactant {
+  SimpleReactant.fromJson(SimpleShelf shelf, dynamic map) : this.fromMap(shelf, map);
 
-  Reactant.fromMap(Shelf shelf, String regnum, Map<String, dynamic> map)
+  SimpleReactant.fromMap(SimpleShelf shelf, Map<String, dynamic> map)
       : this(
             shelf: shelf,
-            regnum: regnum,
-            nomen: map['nomen'],
+            element: map['element'],
             name: map['name'] ?? map['nomen'],
             isSolid: map['solid'] ?? true,
-            circle: map['circle'] ?? 7,
-            group: map['group'] ?? 'Unknown',
-            pater: map['pater'] ?? '',
-            mater: map['mater'] ?? '',
-            color: parseColor(map['color']),
+            color: map['color'],
             quality: map['quality']);
 
-  const Reactant({
-    required Shelf? shelf,
-    required this.regnum,
-    required this.nomen,
+  const SimpleReactant({
+    required SimpleShelf? shelf,
+    required this.element,
     required this.name,
     this.isSolid = true,
-    required this.circle,
-    required this.group,
-    this.groupId = '',
-    this.pater = '',
-    this.mater = '',
     this.color,
     this.colorDescription,
     this.quality,
@@ -55,53 +45,41 @@ class Reactant {
     this.potion,
   }) : _shelf = shelf;
 
-  const Reactant.shit()
+  const SimpleReactant.shit()
       : _shelf = null,
-        regnum = '',
-        nomen = 'Мертвая Голова',
-        name = '🝎 🝎 🝎 Гажа 🝎 🝎 \u{1f74e}',
+        element = '',
+        name = 'Мертвая Голова',
         isSolid = true,
-        circle = 7,
-        group = '',
-        groupId = '',
-        pater = '',
-        mater = '',
         color = null,
         colorDescription = null,
         quality = -1,
         stage = 0,
         potion = null;
 
-  final Shelf? _shelf;
-  final String regnum;
-  final String nomen;
+  final SimpleShelf? _shelf;
+  final String element;
   final String name;
   final bool isSolid;
-  final int circle;
-  final String group;
-  final String groupId;
-  final String pater;
-  final String mater;
-  final Color? color;
+  final String? color;
   final ColorDescription? colorDescription;
   final int? quality;
   final int stage;
 
-  final Potion? potion;
+  final SimplePotion? potion;
+  String? get nature => potion?.nature;
 
   String get displayNomen => stage != 0
       ? 'Микстура'
       : potion == null
-          ? nomen
-          : '${potion!.regnum.regnumSymbol}${potion!.displayPrincipleDirection}${regnum.regnumSymbol}$_namePrefix $nomen';
+          ? ''
+          : '${potion!.nature.natureSymbol}${potion!.displayPrincipleDirection}$_namePrefix';
 
   String get displayName => stage != 0
       ? 'Нестабильное соединение'
       : potion == null
-          ? [_namePrefix, (name.isNotEmpty ? name : nomen)].join(' ')
+          ? [_namePrefix, name].join(' ')
           : potionEffect;
-  String get _namePrefix =>
-      (colorDescription != null ? colorDescription!.symbol : '') + (groupId.isNotEmpty ? groupId : '');
+  String get _namePrefix => (colorDescription != null ? colorDescription!.symbol : '') + (element.elementSymbol);
 
   int get fullStage => stage ~/ 2;
   String get displaySolidState => isSolid.solidState();
@@ -120,7 +98,7 @@ class Reactant {
 
   @override
   String toString() {
-    return name.isNotEmpty ? name : nomen;
+    return name;
   }
 
   static Color? parseColor(String? string) {
@@ -128,26 +106,19 @@ class Reactant {
     return Color(int.parse(string.substring(1), radix: 16) + 0xFF000000);
   }
 
-  Reactant withValues(
+  SimpleReactant withValues(
           {int? stage,
           bool? solid,
-          String? regnum,
-          Potion? potion,
+          String? element,
+          SimplePotion? potion,
           bool? elixir,
           String? principle,
-          String? groupId,
           ColorDescription? colorDescription}) =>
-      Reactant(
+      SimpleReactant(
         shelf: _shelf,
-        regnum: regnum ?? this.regnum,
-        nomen: nomen,
+        element: element ?? this.element,
         name: name,
         isSolid: solid ?? isSolid,
-        circle: circle,
-        group: group,
-        groupId: groupId ?? this.groupId,
-        pater: pater,
-        mater: mater,
         color: color,
         colorDescription: colorDescription ?? this.colorDescription,
         quality: quality,
@@ -155,27 +126,22 @@ class Reactant {
         potion: (potion ?? this.potion)?.brewed(asElixir: elixir, principle: principle),
       );
 
-  bool isChildOf(String one, String another) =>
-      (pater == one && mater == another) || (mater == one && pater == another);
-
-  Concoct concoct() {
-    return Concoct._fromReactant(this);
+  SimpleConcoct concoct() {
+    return SimpleConcoct._fromReactant(this);
   }
 }
 
-class Concoct implements Reactant {
-  const Concoct({
-    required Shelf? shelf,
-    required this.regnum,
+class SimpleConcoct implements SimpleReactant {
+  const SimpleConcoct({
+    required SimpleShelf? shelf,
     this.isSolid = true,
     this.quality,
     required this.potions,
   }) : _shelf = shelf;
 
-  factory Concoct._fromReactant(Reactant reactant) {
-    return Concoct(
+  factory SimpleConcoct._fromReactant(SimpleReactant reactant) {
+    return SimpleConcoct(
       shelf: reactant._shelf,
-      regnum: reactant.potion?.regnum ?? '',
       isSolid: reactant.isSolid,
       quality: reactant.quality,
       potions: [reactant],
@@ -183,15 +149,16 @@ class Concoct implements Reactant {
   }
 
   @override
-  final Shelf? _shelf;
+  final SimpleShelf? _shelf;
   @override
-  final String regnum;
+  String get element => '';
   @override
-  String get nomen =>
-      _namePrefix + potions.map((e) => e.displayNomen.substring(e.displayNomen.characters.first.length)).join('; ');
+  String get nature => '';
+
   @override
-  String get name =>
-      _namePrefix + ' ' + potions.map((e) => e.displayName.substring(e.displayName.characters.first.length)).join('; ');
+  String get name => potions.map((e) => e.displayName).join('\n');
+  String get nomen => _namePrefix + ' ' + potions.map((e) => e.displayNomen).join('; ');
+
   @override
   final bool isSolid;
 
@@ -199,19 +166,7 @@ class Concoct implements Reactant {
   final int? quality;
 
   @override
-  int get circle => -1;
-
-  @override
-  String get group => '';
-  @override
-  String get groupId => '';
-  @override
-  String get pater => '';
-  @override
-  String get mater => '';
-
-  @override
-  Color? get color => null;
+  String? get color => null;
 
   @override
   ColorDescription? get colorDescription => null;
@@ -229,7 +184,7 @@ class Concoct implements Reactant {
   String get displayName => potions.length == 1 ? potions[0].displayName : name;
 
   @override
-  String get _namePrefix => '\u{1F74C}${regnum.regnumSymbol}:';
+  String get _namePrefix => '\u{1F74C}${element.elementSymbol}:';
 
   @override
   String get displaySolidState => isSolid.solidState();
@@ -253,40 +208,34 @@ class Concoct implements Reactant {
 
   @override
   String toString() {
-    return name.isNotEmpty ? name : nomen;
+    return name;
   }
 
   @override
-  bool isChildOf(String one, String another) => false;
+  SimplePotion? get potion => null;
+
+  final List<SimpleReactant> potions;
 
   @override
-  Potion? get potion => null;
-
-  final List<Reactant> potions;
-
-  @override
-  Concoct withValues(
+  SimpleConcoct withValues(
           {int? stage,
           bool? solid,
-          String? regnum,
-          Potion? potion,
+          String? element,
+          SimplePotion? potion,
           bool? elixir,
           String? principle,
-          String? groupId,
           ColorDescription? colorDescription}) =>
-      Concoct(
+      SimpleConcoct(
         shelf: _shelf,
-        regnum: regnum ?? this.regnum,
         isSolid: solid ?? isSolid,
         quality: quality,
         potions: potions,
       );
 
-  Concoct merge(Reactant other) {
+  SimpleConcoct merge(SimpleReactant other) {
     if (!other.isPotion) return this;
-    return Concoct(
+    return SimpleConcoct(
       shelf: _shelf,
-      regnum: regnum,
       isSolid: isSolid,
       quality: quality,
       potions: [...potions, ...other.concoct().potions],
@@ -294,15 +243,15 @@ class Concoct implements Reactant {
   }
 
   @override
-  Concoct concoct() {
+  SimpleConcoct concoct() {
     return this;
   }
 }
 
-class Potion {
-  const Potion({required this.regnum, this.isElixir, this.principle});
+class SimplePotion {
+  const SimplePotion({required this.nature, this.isElixir, this.principle});
 
-  final String regnum;
+  final String nature;
   final bool? isElixir;
   final String? principle;
 
@@ -312,8 +261,8 @@ class Potion {
           ? '\u{1F757}'
           : '\u{1F768}';
 
-  Potion? brewed({bool? asElixir, String? principle}) {
-    return asElixir != null ? Potion(regnum: regnum, isElixir: asElixir, principle: principle) : this;
+  SimplePotion? brewed({bool? asElixir, String? principle}) {
+    return asElixir != null ? SimplePotion(nature: nature, isElixir: asElixir, principle: principle) : this;
   }
 }
 
@@ -335,6 +284,34 @@ extension StringConversions on String {
         return '\u{1F721}';
       case 'herbal':
         return '\u{1F76E}';
+      case 'potion':
+        return '\u{2697}';
+    }
+    return this;
+  }
+
+  String get elementSymbol {
+    switch (this) {
+      case 'Огонь':
+        return '\u{1F702}';
+      case 'Воздух':
+        return '\u{1F701}';
+      case 'Вода':
+        return '\u{1F704}';
+      case 'Земля':
+        return '\u{1F703}';
+    }
+    return this;
+  }
+
+  String get natureSymbol {
+    switch (this) {
+      case 'Сульфур':
+        return '\u{1F70E}';
+      case 'Меркурий':
+        return '\u{263F}';
+      case 'Соль':
+        return '\u{1F73F}';
       case 'potion':
         return '\u{2697}';
     }
