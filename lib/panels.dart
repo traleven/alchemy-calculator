@@ -246,7 +246,7 @@ class ReactantsPanel extends StatelessWidget {
               label: ColorBox(size: 25, color: color),
               selected: shelf.reactantColorFilterIncludes(color.color),
               onSelected: (active) => shelf.setReactantColorFilter(color.color, active),
-              tooltip: color.name,
+              tooltip: [color.name, ...color.description].join('\n'),
             ))
         .toList(growable: false);
   }

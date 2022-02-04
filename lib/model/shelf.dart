@@ -15,8 +15,6 @@
 /// You should have received a copy of the GNU General Public License
 /// along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import 'dart:math';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -64,7 +62,7 @@ class Shelf extends ChangeNotifier {
       color: Colors.transparent,
       symbol: '',
       icon: null,
-      name: '',
+      name: 'Первоэлементы',
       description: [],
       paterQuality: -1,
       materQuality: -1,
