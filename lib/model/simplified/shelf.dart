@@ -44,7 +44,6 @@ class SimpleShelf extends ChangeNotifier {
   static final Map<String, Map<bool, SimplePrinciple>> _principles = {};
 
   static final Map<Color, ColorDescription> _colorSymbols = {};
-  static final Map<String, List<String>> _signSymbols = {};
   static final Map<String, SimpleShelf> _cache = {};
   static const Map<String, String> _natureSupport = {'Соль': 'Меркурий', 'Меркурий': 'Сульфур', 'Сульфур': 'Соль'};
 
@@ -71,22 +70,16 @@ class SimpleShelf extends ChangeNotifier {
 
   Future<void> asyncInit(AssetBundle bundle, String fileName) async {
     await AlchemyIcons.loadAsync(bundle);
-    if (_colorSymbols.length <= 1) {
-      final nomenclatureJson = await bundle.loadString('recipies/nomenclature.json');
-      Map<String, dynamic> data = jsonDecode(nomenclatureJson);
-      data['colors'].forEach((value) {
-        final color = SimpleReactant.parseColor(value['color']);
-        if (color != null) {
-          _colorSymbols[color] = ColorDescription.fromJson(color, value);
-        }
-      });
-      data['signs'].forEach((value) {
-        _signSymbols[value['symbol']] = value['names'].cast<String>().toList();
-      });
-    }
 
     final json = await bundle.loadString('recipies/$fileName.json');
     Map<String, dynamic> data = jsonDecode(json);
+    data['colors'].forEach((value) {
+      final color = SimpleReactant.parseColor(value['color']);
+      if (color != null) {
+        _colorSymbols[color] = ColorDescription.fromJson(color, value);
+      }
+    });
+
     data["reactants"].forEach((value) {
       final reactant = SimpleReactant.fromJson(this, value);
       _data[reactant.name] = reactant.withValues(
@@ -118,16 +111,6 @@ class SimpleShelf extends ChangeNotifier {
 
     notifyListeners();
   }
-
-  List<String> get groupIds {
-    var result = _signSymbols.keys.toList(growable: false);
-    result.sort();
-    return result;
-  }
-
-  static String? getNameForGroup(String groupId) => _signSymbols[groupId]?.join('\n');
-  static String? getIdForGroup(String groupName) =>
-      _signSymbols.keys.firstWhereOrNull((sign) => groupName.contains(sign));
 
   List<SimpleReactant> get reactants => _data.values.toList(growable: false);
   List<SimpleReactant> get filteredReactants => _filteredReactants.toList(growable: false);

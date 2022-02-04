@@ -172,5 +172,124 @@
         { "element": "Воздух", "color": "Черный", "name": "страх" },
         { "element": "Вода", "color": "Черный", "name": "боль" },
         { "element": "Земля", "color": "Черный", "name": "смерть" }
+    ],
+    "colors": [
+        {
+            "color": "#f4cccc",
+            "symbol": "☉",
+            "icon": "icon_sun",
+            "name": "Солнце",
+            "description": [
+                "Красный",
+                "Вечный",
+                "Золотой"
+            ],
+            "paterQuality": 0,
+            "materQuality": 0
+        },
+        {
+            "color": "#ffffff",
+            "symbol": "☽",
+            "icon": "icon_moon",
+            "name": "Луна",
+            "description": [
+                "Белый",
+                "Бледный",
+                "Серебряный"
+            ],
+            "paterQuality": 1,
+            "materQuality": 0
+        },
+        {
+            "color": "#cfe2f3",
+            "symbol": "♃",
+            "icon": "icon_jupiter",
+            "name": "Юпитер",
+            "description": [
+                "Синий",
+                "Благой",
+                "Оловянный"
+            ],
+            "paterQuality": 2,
+            "materQuality": 0
+        },
+        {
+            "color": "#d9ead3",
+            "symbol": "♀",
+            "icon": "icon_venus",
+            "name": "Венера",
+            "description": [
+                "Зеленый",
+                "Утренний",
+                "Медный"
+            ],
+            "paterQuality": 0,
+            "materQuality": 1
+        },
+        {
+            "color": "#e6b8af",
+            "symbol": "♂",
+            "icon": "icon_mars",
+            "name": "Марс",
+            "description": [
+                "Багровый",
+                "Кровавый",
+                "Железный"
+            ],
+            "paterQuality": 1,
+            "materQuality": 1
+        },
+        {
+            "color": "#fce5cd",
+            "symbol": "⚷",
+            "icon": "icon_chiron",
+            "name": "Хирон",
+            "description": [
+                "Светлый",
+                "Надежный",
+                "Латунный"
+            ],
+            "paterQuality": 2,
+            "materQuality": 1
+        },
+        {
+            "color": "#fff2cc",
+            "symbol": "\u263F",
+            "icon": "icon_matter_mercury",
+            "name": "Гермаон",
+            "description": [
+                "Желтый",
+                "Вещий",
+                "Киноварный"
+            ],
+            "paterQuality": 0,
+            "materQuality": 2
+        },
+        {
+            "color": "#d9d2e9",
+            "symbol": "⚸",
+            "icon": "icon_lilith",
+            "name": "Лилит",
+            "description": [
+                "Темный",
+                "Ночной",
+                "Висмутовый"
+            ],
+            "paterQuality": 1,
+            "materQuality": 2
+        },
+        {
+            "color": "#b7b7b7",
+            "symbol": "♄",
+            "icon": "icon_saturn",
+            "name": "Сатурн",
+            "description": [
+                "Черный",
+                "Холодный",
+                "Свинцовый"
+            ],
+            "paterQuality": 2,
+            "materQuality": 2
+        }
     ]
 }

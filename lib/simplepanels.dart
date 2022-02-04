@@ -1,4 +1,5 @@
 import 'package:alchemy_calculator/main.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -200,7 +201,7 @@ class ReactantsPanel extends StatelessWidget {
         label: ImageIcon('potion'.regnumIcon),
         selected: shelf.reactantPotionFilterIncludes(),
         onSelected: (active) => shelf.setReactantPotionFilter(active),
-        tooltip: '',
+        tooltip: 'Зелья',
       ),
     );
     return result;
@@ -212,7 +213,7 @@ class ReactantsPanel extends StatelessWidget {
               label: ColorBox(size: 25, color: color),
               selected: shelf.reactantColorFilterIncludes(color.name),
               onSelected: (active) => shelf.setReactantColorFilter(color.name, active),
-              tooltip: color.name,
+              tooltip: color.description.firstOrNull ?? color.name,
             ))
         .toList(growable: false);
   }
