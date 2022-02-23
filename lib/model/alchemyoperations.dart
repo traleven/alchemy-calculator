@@ -95,8 +95,8 @@ class AlchemyOperation implements Comparable {
                     ? paterQuality!.compareTo(other.paterQuality)
                     : materQuality != null && materQuality != other.materQuality
                         ? materQuality!.compareTo(other.materQuality)
-                        : regnum != other.element
-                            ? regnum.compareTo(other.element)
+                        : regnum != other.regnum
+                            ? regnum.compareTo(other.regnum)
                             : name.compareTo(other.name);
   }
 
